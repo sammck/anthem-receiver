@@ -1,0 +1,138 @@
+version: "3.3"
+
+# docker-compose.yml configuration for a simple HTTP service container
+# that sits behind traefik running in a tp_hub environment and provides
+# a REST API for control of a Anthem receiver on the local LAN.
+#
+# See https://github.com/sammck/tp-hub for more information about tp_hub.
+#
+#  Environment Variables:
+#    APP_NAME                   The app name used for the path prefix  ("http(s)://hostname>/${APP_NAME}/"). Defaults to anthem-receiver
+#
+#    anthem_receiver_HOST         The hostname or LAN IP address of the Anthem receiver. Required, because SDDP
+#                               will not work behind Docker's NAT.
+#
+#    anthem_receiver_PASSWORD     The password used to authenticate requests to the Anthem receiver.
+#                               If ommitted, no authentication is required.
+#
+#   === Variables below are provided by Portainer when launched on tp_hub, and do not need to be added to launch environment variables ===
+#
+#    SHARED_LAN_APP_DNS_NAME
+#                               The fully qualified public DNS domain that the private-only shared apps will run on.
+#                               If launched by Portainer on tp_hub, this variable is provided by Portainer's own
+#                               environment, and does not need to be added to launch environment variables.
+#
+#    SHARED_LAN_APP_CERT_RESOLVER
+#                            "prod" or "staging".  The certificate resolver to use for ${SHARED_LAN_APP_DNS_NAME}
+#                               If launched by Portainer on tp_hub, this variable is provided by Portainer's own
+#                               environment, and does not need to be added to launch environment variables.
+#
+#    HUB_HOSTNAME               The linux hostname of the hub host machine. Used as a host name match for HTTP
+#                               path-based routing on the LAN only.
+#                               If launched by Portainer on tp_hub, this variable is provided by Portainer's own
+#                               environment, and does not need to be added to launch environment variables.
+#
+#    HUB_HOSTNAME2              Alternate hostname of the hub hostname. Normally this is "${HUB_HOSTNAME}.local".
+#                               Used as a host name match for HTTP path-based routing on the LAN only.
+#                               If launched by Portainer on tp_hub, this variable is provided by Portainer's own
+#                               environment, and does not need to be added to launch environment variables.
+#
+#    HUB_LAN_IP                 The LAN IP address of the hub host machine. Used as a host name match for HTTP
+#                               path-based routing on the LAN only.
+#                               If launched by Portainer on tp_hub, this variable is provided by Portainer's own
+#                               environment, and does not need to be added to launch environment variables.
+#
+# This stack serves:
+#
+#    http://<any-hostname>/${APP_NAME:-anthem-receiver}           (private LAN only)
+#
+# This stack serves:
+#    http://${SHARED_LAN_APP_DNS_NAME}/${APP_NAME:-anthem-receiver}     (private LAN)                     (path-based, handled by <common-lan-local-hostname> router; see below)
+#    https://${SHARED_LAN_APP_DNS_NAME}/${APP_NAME:-anthem-receiver}    (private LAN only)                (path-based)
+#    http://<common-lan-local-hostname>/${APP_NAME:-anthem-receiver}    (private LAN only)                (path-based, multiple hostnames accepted; see below)
+#
+#    Where <common-lan-local-hostname> is one of:
+#       ${SHARED_LAN_APP_DNS_NAME}
+#       ${HUB_HOSTNAME}
+#       ${HUB_HOSTNAME2}
+#       ${HUB_LAN_IP}
+#       localhost
+#       127.0.0.1
+#
+#   The path-based routes all strip off the "/${APP_NAME:-anthem-receiver}" URL" prefix before forwarding to the anthem-receiver service; the stripped
+#   prefix is passed on in the "X-Forwarded-Prefix" header. This technique is useful for routing a single DNS name to multiple services that
+#   would otherwise collide in the URL paths that they serve. It should be noted that in many cases the service itself must be configured to
+#   handle the X-Forwarded-Prefix in order to work correctly (e.g., to add the prefix back in when returning link URLs or redirects).
+#   In this case, the --root-path option is passed to uvicorn.
+#
+# Prerequisites:
+#   Prerequisites common to all stacks (only done once when traefik is initially set up):
+#     * Traefik should be configured with entrypoints as follows:
+#            lanweb         HTTP reguests coming in from the intranet through <this-host-lan-ip>:80. Not reachable from internet.
+#            lanwebsecure   HTTPS reguests coming in from the intranet through <this-host-lan-ip>:443. Not reachable from internet.
+#     * traefik should be configured to proxy requests to backend service containers through docker network "traefik"
+#
+services:
+  anthem-receiver:
+    image: "sammck/anthem-receiver"
+    build: .
+
+    environment:
+      - "anthem_receiver_PASSWORD=${anthem_receiver_PASSWORD:-}"
+      - "anthem_receiver_HOST=${anthem_receiver_HOST:-}"
+
+    command:
+      - "/app/.venv/bin/uvicorn"
+      - "anthem_receiver.rest_server.app:proj_api"
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "80"
+      # Tell swagger/openAI UI that traefik has stripped off the /${APP_NAME:-anthem-receiver} prefix, so it can be added back in in links
+      - "--root-path"
+      - "/${APP_NAME:-anthem-receiver}"
+
+    ports:
+      []
+      # - "8099:80"             # Expose the service on port 80 to the host on port 8099, for testing purposes only
+
+    networks:
+      - traefik                # The network through which traefik forwards requests to our service
+
+    restart: always            # This container will be restarted when this host reboots or docker is restarted
+
+    labels:
+      - "traefik.enable=true"   # tells traefik that this container should be reverse-proxied
+
+      # Middleware that will strip off the /${APP_NAME:-anthem-receiver} prefix before forwarding to the anthem-receiver service (used by multiple routers)
+      - "traefik.http.middlewares.${APP_NAME:-anthem-receiver}-strip-prefix.stripPrefix.prefixes=/${APP_NAME:-anthem-receiver}"
+
+      # -----------------------------------------
+      # A router for http://<common-lan-local-hostname>/${APP_NAME:-anthem-receiver}, on the local LAN entrypoint only
+      - "traefik.http.routers.${APP_NAME:-anthem-receiver}-http-private-path.entrypoints=lanweb"
+      - "traefik.http.routers.${APP_NAME:-anthem-receiver}-http-private-path.rule=Host(`${SHARED_LAN_APP_DNS_NAME}`,`${HUB_HOSTNAME}`,`${HUB_HOSTNAME2}`,`${HUB_LAN_IP}`,`localhost`,`127.0.0.1`) && PathPrefix(`/${APP_NAME:-anthem-receiver}`)"
+      # Strip the prefix
+      - "traefik.http.routers.${APP_NAME:-anthem-receiver}-http-private-path.middlewares=${APP_NAME:-anthem-receiver}-strip-prefix"
+
+      # -----------------------------------------
+      # A router for https://${SHARED_LAN_APP_DNS_NAME}/${APP_NAME:-anthem-receiver}, on the local LAN entrypoint only
+      - "traefik.http.routers.${APP_NAME:-anthem-receiver}-https-shared-lan-private-path.entrypoints=lanwebsecure"
+      - "traefik.http.routers.${APP_NAME:-anthem-receiver}-https-shared-lan-private-path.tls.certresolver=${SHARED_LAN_APP_CERT_RESOLVER}"
+      - "traefik.http.routers.${APP_NAME:-anthem-receiver}-https-shared-lan-private-path.rule=Host(`${SHARED_LAN_APP_DNS_NAME}`) && PathPrefix(`/${APP_NAME:-anthem-receiver}`)"
+      # Strip the prefix
+      - "traefik.http.routers.${APP_NAME:-anthem-receiver}-https-shared-lan-private-path.middlewares=${APP_NAME:-anthem-receiver}-strip-prefix"
+      # -----------------------------------------
+
+
+networks:
+
+  # The backend docker network used for traefik reverse-proxy request forwarding. All containers
+  # that provide HTTP services behind the traefik reverse-proxy should be placed in
+  # this network. traefik will route to the service on its exposed port, if there is exactly one, or port
+  # 80 by default.  This can be overridden with:
+  #
+  #    traefik.http.services.<service-name>.loadbalancer.server.port=<custom-port>
+  #
+  # It is not necessary for containers behind the reverse-proxy to expose their HTTP port to the host.
+  traefik:
+    external: true

@@ -1,0 +1,285 @@
+Command,Hex Code,ASCII
+3D Setting - Direct access to 3D Setting menu (X30/X70/X90/RS45/55/65),21 89 01 52 43 37 33 44 35 0A,D5
+3D Format - Cycles through all available 3D formats (X30/X70/X90/RS45/55/65),21 89 01 52 43 37 33 44 36 0A,D6
+Advanced - Direct access to Picture Adjust > Advanced menu (HD550/950/990/X3/X7/X9/ X30/X70/X90/RS15/25/35/40/50/60/45/55/65),21 89 01 52 43 37 33 37 33 0A,73
+"Anamorphic - Off
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65) Vertical Stretch - Off
+(HD350/750/950/990/RS10/20/25/35)",21 89 01 52 43 37 33 32 34 0A,24
+"Anamorphic - A
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65) Vertical Stretch - On
+(HD350/750/950/990/RS10/20/25/35)",21 89 01 52 43 37 33 32 33 0A,23
+"Anamorphic - B
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 32 42 0A,2B
+Anamorphic - Cycles through Off/A/B (X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65),21 89 01 52 43 37 33 43 35 0A,C5
+Aspect - 16:9,21 89 01 52 43 37 33 32 36 0A,26
+Aspect - 4:3,21 89 01 52 43 37 33 32 35 0A,25
+Aspect - Zoom,21 89 01 52 43 37 33 32 37 0A,27
+"Aspect (PC) - Auto
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 41 45 0A,AE
+"Aspect (PC) - Full
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 30 0A,B0
+"Aspect (PC) - Just
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 41 46 0A,AF
+Aspect + (cycles through all available modes),21 89 01 52 43 37 33 37 37 0A,77
+Auto Align (PC input on HD750/950/990/X7/X9/ X70/X90/RS20/25/35/50/60/55/65),21 89 01 52 43 37 33 31 33 0A,13
+"Auto Lens Centre
+(X3/X7/X9/X70/X90/RS50/60/45/55/65)",21 89 01 52 43 37 33 43 39 0A,C9
+Back - Steps backwards through menus and removes any OSD messages,21 89 01 52 43 37 33 30 33 0A,3
+BNR (Block Noise Reduction) - Off,21 89 01 52 43 37 33 31 30 0A,10
+BNR (Block Noise Reduction) - On,21 89 01 52 43 37 33 30 46 0A,0F
+Bright Level - (X7/X9/X70/X90/RS50/60/55/65),21 89 01 52 43 37 33 41 33 0A,A3
+Bright Level + (X7/X9/X70/X90/RS50/60/55/65),21 89 01 52 43 37 33 41 32 0A,A2
+Brightness –,21 89 01 52 43 37 33 37 42 0A,7B
+Brightness +,21 89 01 52 43 37 33 37 41 0A,7A
+Brightness Adj. (Adjustment Bar On/Off toggle),21 89 01 52 43 37 33 30 39 0A,9
+CEC - Off,21 89 01 52 43 37 33 35 37 0A,57
+CEC - On,21 89 01 52 43 37 33 35 36 0A,56
+Clear Motion Drive - Cycles through: Off/ Mode 1/Mode 2/Mode 3/Mode 4/Inverse Telecine (X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65),21 89 01 52 43 37 33 38 41 0A,8A
+"Clear Motion Drive - Off
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 34 37 0A,47
+"Clear Motion Drive - Mode 1
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 43 45 0A,CE
+"Clear Motion Drive - Mode 2
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 43 46 0A,CF
+"Clear Motion Drive - Mode 3
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 34 38 0A,48
+"Clear Motion Drive - Mode 4
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 34 39 0A,49
+Clear Motion Drive - Inverse Telecine (X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65),21 89 01 52 43 37 33 34 41 0A,4A
+Colour –,21 89 01 52 43 37 33 37 44 0A,7D
+Colour +,21 89 01 52 43 37 33 37 43 0A,7C
+Colour Adj. (Adjustment Bar On/Off toggle),21 89 01 52 43 37 33 31 35 0A,15
+Colour Management - Off (HD750/950/990/ X7/X9/RS20/25/35/50/60/55/65),21 89 01 52 43 37 33 36 30 0A,60
+Colour Management - Custom 1 (HD750/950/ 990/X7/X9/RS20/25/35/50/60/55/65),21 89 01 52 43 37 33 36 31 0A,61
+Colour Management - Custom 2 (HD750/950/ 990/X7/X9/RS20/25/35/50/60/55/65),21 89 01 52 43 37 33 36 32 0A,62
+Colour Management - Custom 3 (HD750/950/ 990/X7/X9/RS20/25/35/50/60/55/65),21 89 01 52 43 37 33 36 33 0A,63
+"Colour Management - Cycles through: Off/ Custom 1/Custom 2/Custom 3
+(X7/X9/X70/X90/RS50/60/55/65)",21 89 01 52 43 37 33 38 39 0A,89
+"Colour Profile - Cycles through all available Colour Profiles
+(X7/X9/X79/X90/RS50/60/55/65)",21 89 01 52 43 37 33 38 38 0A,88
+Colour Space - Cycles through Standard/ Wide 1/Wide 2 (X3/X30/RS40/RS45),21 89 01 52 43 37 33 43 44 0A,CD
+"Colour Temp. - 5800K
+(HD350/550/750/950/990/RS10/15/20/25/35)",21 89 01 52 43 37 33 34 45 0A,4E
+Colour Temp. - 6500K,21 89 01 52 43 37 33 34 46 0A,4F
+"Colour Temp. - 7500K
+(HD350/550/750/950/990/RS10/15/20/25/35)",21 89 01 52 43 37 33 35 30 0A,50
+"Colour Temp. - 9300K
+(HD350/550/750/950/990/RS10/15/20/25/35)",21 89 01 52 43 37 33 35 31 0A,51
+Colour Temp. - Custom 1,21 89 01 52 43 37 33 35 33 0A,53
+Colour Temp. - Custom 2,21 89 01 52 43 37 33 35 34 0A,54
+Colour Temp. - Custom 3,21 89 01 52 43 37 33 35 35 0A,55
+Colour Temp. - High Bright (HD350/550/750/ 950/990/X3/X30/RS10/15/20/25/35/40/45),21 89 01 52 43 37 33 35 32 0A,52
+Colour Temp. + (cycles through all options),21 89 01 52 43 37 33 37 36 0A,76
+"Colour Temperature Gain Blue –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 39 31 0A,91
+"Colour Temperature Gain Blue +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 39 30 0A,90
+"Colour Temperature Gain Green –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 38 46 0A,8F
+"Colour Temperature Gain Green +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 38 45 0A,8E
+"Colour Temperature Gain Red –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 38 44 0A,8D
+"Colour Temperature Gain Red +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 38 43 0A,8C
+"Colour Temperature Offset Blue –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 39 37 0A,97
+"Colour Temperature Offset Blue +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 39 36 0A,96
+"Colour Temperature Offset Green –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 39 35 0A,95
+"Colour Temperature Offset Green +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 39 34 0A,94
+"Colour Temperature Offset Red –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 39 33 0A,93
+"Colour Temperature Offset Red +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 39 32 0A,92
+Contrast –,21 89 01 52 43 37 33 37 39 0A,79
+Contrast +,21 89 01 52 43 37 33 37 38 0A,78
+Contrast Adj. (Adjustment Bar On/Off toggle),21 89 01 52 43 37 33 30 41 0A,0A
+CTI (Colour Transient Improvement) - Off (HD350/550/750/950/990/RS10/15/20/25/35),21 89 01 52 43 37 33 35 43 0A,5C
+CTI (Colour Transient Improvement) - Low (HD350/550/750/950/990/RS10/15/20/25/35),21 89 01 52 43 37 33 35 44 0A,5D
+CTI (Colour Transient Improvement) - Middle (HD350/550/750/950/990/RS10/15/20/25/35),21 89 01 52 43 37 33 35 45 0A,5E
+CTI (Colour Transient improvement) - High (HD350/550/750/950/990/RS10/15/20/25/35),21 89 01 52 43 37 33 35 46 0A,5F
+Cursor Down ▼,21 89 01 52 43 37 33 30 32 0A,2
+Cursor Left ◄,21 89 01 52 43 37 33 33 36 0A,36
+Cursor Right ►,21 89 01 52 43 37 33 33 34 0A,34
+Cursor Up ▲,21 89 01 52 43 37 33 30 31 0A,1
+Dark Level – (X7/X9/X70/X90/RS50/60/55/65),21 89 01 52 43 37 33 41 35 0A,A5
+Dark Level + (X7/X9/X70/X90/RS50/60/55/65),21 89 01 52 43 37 33 41 34 0A,A4
+Detail Enhance –,21 89 01 52 43 37 33 31 32 0A,12
+Detail Enhance +,21 89 01 52 43 37 33 31 31 0A,11
+Picture Tone Blue – (X7/X9/RS50/60 - Film Mode Only) (X70/X90/RS55/65 - All Modes),21 89 01 52 43 37 33 41 31 0A,A1
+Picture Tone Blue + (X7/X9/RS50/60 - Film Mode Only) (X70/X90/RS55/65 - All Modes),21 89 01 52 43 37 33 41 30 0A,A0
+Picture Tone Green – (X7/X9/RS50/60 - Film Mode Only) (X70/X90/RS55/65 - All Modes),21 89 01 52 43 37 33 39 46 0A,9F
+Picture Tone Green + (X7/X9/RS50/60 - Film Mode Only) (X70/X90/RS55/65 - All Modes),21 89 01 52 43 37 33 39 45 0A,9E
+Picture Tone Red – (X7/X9/RS50/60 - Film Mode Only) (X70/X90/RS55/65 - All Modes),21 89 01 52 43 37 33 39 44 0A,9D
+Picture Tone Red + (X7/X9/RS50/60 - Film Mode Only) (X70/X90/RS55/65 - All Modes),21 89 01 52 43 37 33 39 43 0A,9C
+Picture Tone White – (X7/X9/RS50/60 - Film Mode Only) (X70/X90/RS55/65 - All Modes),21 89 01 52 43 37 33 39 42 0A,9B
+Picture Tone White + (X7/X9/RS50/60 - Film Mode Only) (X70/X90/RS55/65 - All Modes),21 89 01 52 43 37 33 39 41 0A,9A
+Gamma - A,21 89 01 52 43 37 33 33 39 0A,39
+Gamma - B,21 89 01 52 43 37 33 33 41 0A,3A
+Gamma - C,21 89 01 52 43 37 33 33 42 0A,3B
+Gamma - Custom 1,21 89 01 52 43 37 33 33 43 0A,3C
+Gamma - Custom 2,21 89 01 52 43 37 33 33 44 0A,3D
+Gamma - Custom 3,21 89 01 52 43 37 33 33 45 0A,3E
+Gamma - D (HD550/950/990/X3/X7/X9/ X30/X70/X90/RS15/25/35/40/50/60/45/55/65),21 89 01 52 43 37 33 33 46 0A,3F
+Gamma - Normal,21 89 01 52 43 37 33 33 38 0A,38
+Gamma + (cycles through all options),21 89 01 52 43 37 33 37 35 0A,75
+"Hide - Off
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 44 31 0A,D1
+"Hide - On
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 44 30 0A,D0
+Hide (On/Off toggle),21 89 01 52 43 37 33 31 44 0A,1D
+"Horizontal Position –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 41 42 0A,AB
+"Horizontal Position +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 41 41 0A,AA
+Information (displays Information tab of menu),21 89 01 52 43 37 33 37 34 0A,74
+Input - Component,21 89 01 52 43 37 33 34 44 0A,4D
+Input - HDMI 1,21 89 01 52 43 37 33 37 30 0A,70
+Input - HDMI 2,21 89 01 52 43 37 33 37 31 0A,71
+Input - PC (HD750/950/990/X7/X9/X70/X90 RS20/25/35/50/60/55/65),21 89 01 52 43 37 33 34 36 0A,46
+Input - S-Video (HD350/550/750/950/990),21 89 01 52 43 37 33 34 43 0A,4C
+Input - Video (HD350/550/750/950/990),21 89 01 52 43 37 33 34 42 0A,4B
+Input + (cycles through all available inputs),21 89 01 52 43 37 33 30 38 0A,8
+ISF - Day (X7/X9/X70/X90/RS50/60/55/65),21 89 01 52 43 37 33 36 34 0A,64
+ISF - Night (X7/X9/X70/X90/RS50/60/55/65),21 89 01 52 43 37 33 36 35 0A,65
+ISF - Off (HD950/990/X7/X9/X70/X90/ RS25/35/50/60/55/65),21 89 01 52 43 37 33 35 41 0A,5A
+ISF - On (HD950/990/X7/X9/X70/X90/ RS25/35/50/60/55/65),21 89 01 52 43 37 33 35 42 0A,5B
+Keystone Correction Horizontal –,21 89 01 52 43 37 33 34 31 0A,41
+Keystone Correction Horizontal +,21 89 01 52 43 37 33 34 30 0A,40
+Keystone Correction Vertical –,21 89 01 52 43 37 33 31 43 0A,1C
+Keystone Correction Vertical +,21 89 01 52 43 37 33 31 42 0A,1B
+Lens Aperture - 1 (HD350/HD550),21 89 01 52 43 37 33 32 38 0A,28
+Lens Aperture - 2 (HD350/HD550),21 89 01 52 43 37 33 32 39 0A,29
+Lens Aperture - 3 (HD350/HD550),21 89 01 52 43 37 33 32 41 0A,2A
+"Lens Aperture – If Lens Aperture Gauge is not displayed - displays gauge. If Lens Aperture Gauge is already displayed - Lens Aperture is decreased
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 31 46 0A,1F
+"Lens Aperture + If Lens Aperture Gauge is not displayed - displays gauge. If Lens Aperture Gauge is already displayed - Lens Aperture is increased
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 31 45 0A,1E
+"Lens Aperture Adj. (HD350/750/950/990/ RS10/20/25/35 - Adjustment Bar On/Off toggle) (X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65 - Displays Adjustment Bar)
+(HD550/RS15 - Cycles through all options)",21 89 01 52 43 37 33 32 30 0A,20
+Lens Control (cycles through all options),21 89 01 52 43 37 33 33 30 0A,30
+Lens Focus –,21 89 01 52 43 37 33 33 32 0A,32
+Lens Focus +,21 89 01 52 43 37 33 33 31 0A,31
+"Lens Memory - Cycles through Lens Memory Pages: Select/Save/Name Edit
+(X30/X70/X90/RS45/55/65)",21 89 01 52 43 37 33 44 34 0A,D4
+Lens Memory 1 (X30/X70/X90/RS45/55/65),21 89 01 52 43 37 33 44 38 0A,D8
+Lens Memory 2 (X30/X70/X90/RS45/55/65),21 89 01 52 43 37 33 44 39 0A,D9
+Lens Memory 3 (X30/X70/X90/RS45/55/65),21 89 01 52 43 37 33 44 41 0A,DA
+Lens Shift - Down,21 89 01 52 43 37 33 32 32 0A,22
+Lens Shift - Left,21 89 01 52 43 37 33 34 34 0A,44
+Lens Shift - Right,21 89 01 52 43 37 33 34 33 0A,43
+Lens Shift - Up,21 89 01 52 43 37 33 32 31 0A,21
+Lens Zoom - In,21 89 01 52 43 37 33 33 35 0A,35
+Lens Zoom - Out,21 89 01 52 43 37 33 33 37 0A,37
+"Mask Bottom –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 38 0A,B8
+"Mask Bottom +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 37 0A,B7
+"Mask Left –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 32 0A,B2
+"Mask Left +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 31 0A,B1
+"Mask Right –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 34 0A,B4
+"Mask Right +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 33 0A,B3
+"Mask Top –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 36 0A,B6
+"Mask Top +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 35 0A,B5
+Menu (On/Off toggle),21 89 01 52 43 37 33 32 45 0A,2E
+Menu Position (HD550/950/990/X3/X7/X9/ X30/X70/X90/RS15/25/35/40/50/60/45/55/65),21 89 01 52 43 37 33 34 32 0A,42
+MNR (Mosquito Noise Reduction) –,21 89 01 52 43 37 33 30 45 0A,0E
+MNR (Mosquito Noise Reduction) +,21 89 01 52 43 37 33 30 44 0A,0D
+"NR (toggles display of RNR/MNR)
+(HD350/550/750/950/990/RS10/15/20/25/35)",21 89 01 52 43 37 33 31 38 0A,18
+OK (to accept currently selected option),21 89 01 52 43 37 33 32 46 0A,2F
+"Phase (PC Input) –
+(X7/X9/X70/X90/RS50/60/55/65)",21 89 01 52 43 37 33 41 39 0A,A9
+"Phase (PC Input) +
+(X7/X9/X70/X90/RS50/60/55/65)",21 89 01 52 43 37 33 41 38 0A,A8
+Picture Adjust (HD550/750/990/X3/X7/X9/ X30/X70/X90/RS15/25/35/40/50/60/45/55/65),21 89 01 52 43 37 33 37 32 0A,72
+"Picture Mode - 3D
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 38 37 0A,87
+Picture Mode - Cinema 1 (X3/X7/X9/X30/X70/ X90/RS40/50/60/45/55/65 - Film Mode),21 89 01 52 43 37 33 36 39 0A,69
+Picture Mode - Cinema 2 (X3/X7/X9/X30/X70/ X90/RS40/50/60/45/55/65 - Cinema Mode),21 89 01 52 43 37 33 36 38 0A,68
+Picture Mode - Cinema 3 (HD550/750/990/ RS15/25/35) (X3/X7/X9/X30/X70/X90/ RS40/50/60/45/55/65 - Animation Mode),21 89 01 52 43 37 33 36 36 0A,66
+"Picture Mode - Dynamic
+(HD350/550/750/950/990)",21 89 01 52 43 37 33 36 42 0A,6B
+Picture Mode - Natural,21 89 01 52 43 37 33 36 41 0A,6A
+Picture Mode - Stage,21 89 01 52 43 37 33 36 37 0A,67
+Picture Mode - THX (HD750/950/990/X7/X9/ X70/X90/RS20/25/35/50/60/55/65),21 89 01 52 43 37 33 36 46 0A,6F
+Picture Mode - User 1,21 89 01 52 43 37 33 36 43 0A,6C
+Picture Mode - User 2,21 89 01 52 43 37 33 36 44 0A,6D
+Picture Mode - User 3 (HD550/750/950/990/ X3/X30/RS20/25/35/40/45),21 89 01 52 43 37 33 36 45 0A,6E
+"Picture Mode - User 4
+(X30/X70/X90/RS45/55/65)",21 89 01 52 43 37 33 43 41 0A,CA
+"Picture Mode - User 5
+(X30/X70/X90/RS45/55/65)",21 89 01 52 43 37 33 43 42 0A,CB
+"Pixel Shift - Horizontal Blue –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 45 0A,BE
+"Pixel Shift - Horizontal Blue +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 44 0A,BD
+"Pixel Shift - Horizontal Green –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 43 0A,BC
+"Pixel Shift - Horizontal Green +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 42 0A,BB
+"Pixel Shift - Horizontal Red –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 41 0A,BA
+"Pixel Shift - Horizontal Red +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 39 0A,B9
+"Pixel Shift - Vertical Blue –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 43 34 0A,C4
+"Pixel Shift - Vertical Blue +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 43 33 0A,C3
+"Pixel Shift - Vertical Green –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 43 32 0A,C2
+"Pixel Shift - Vertical Green +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 43 31 0A,C1
+"Pixel Shift - Vertical Red –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 43 30 0A,C0
+"Pixel Shift - Vertical Red +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 42 46 0A,BF
+Power - Off (send twice with short delay between to switch off),21 89 01 52 43 37 33 30 36 0A,6
+Power - On,21 89 01 52 43 37 33 30 35 0A,5
+RNR (Random Noise Reduction) –,21 89 01 52 43 37 33 30 43 0A,0C
+RNR (Random Noise Reduction) +,21 89 01 52 43 37 33 30 42 0A,0B
+Screen Adjust - Off (X3/X30/RS40/45),21 89 01 52 43 37 33 38 30 0A,80
+Screen Adjust - A (X3/X30/RS40/45),21 89 01 52 43 37 33 38 31 0A,81
+Screen Adjust - B (X3/X30/RS40/45),21 89 01 52 43 37 33 38 32 0A,82
+Screen Adjust - C (X3/X30/RS40/45),21 89 01 52 43 37 33 38 33 0A,83
+Sharpness –,21 89 01 52 43 37 33 37 46 0A,7F
+Sharpness +,21 89 01 52 43 37 33 37 45 0A,7E
+"Sharpness Adj.
+(Adjustment Bar On/Off toggle)",21 89 01 52 43 37 33 31 34 0A,14
+Shutter - Close (HD550/950/990/X3/X7/X9/ X30/X70/X90/RS15/25/35/40/50/60/45/55/65),21 89 01 52 43 37 33 31 39 0A,19
+Shutter - Open (HD550/950/990/X3/X7/X9/ X30/X70/X90/RS15/25/35/40/50/60/45/55/65),21 89 01 52 43 37 33 31 41 0A,1A
+Shutter - Off - Un-synchronises shutter with “Hide” function (HD550/950/990/X3/X7/X9/ X30/X70/X90/RS15/25/35/40/50/60/45/55/65),21 89 01 52 43 37 33 32 44 0A,2D
+"Shutter - On - Synchronises shutter with “Hide” function (HD550/950/990/X3/X7/X9/
+X30/X70/X90/RS15/25/35/40/50/60/45/55/65)",21 89 01 52 43 37 33 32 43 0A,2C
+Test Pattern (cycles through all patterns) (HD350/550/750/950/990/RS10/15/20/25/35),21 89 01 52 43 37 33 35 39 0A,59
+THX - Bright (X7/X9/X70/X90/RS50/60/55/65),21 89 01 52 43 37 33 38 35 0A,85
+THX - Dark (X7/X9/X70/X90/RS50/60/55/65),21 89 01 52 43 37 33 38 36 0A,86
+THX - Off (X7/X9/X70/X90/RS50/60/55/65),21 89 01 52 43 37 33 43 37 0A,C7
+THX - On (X7/X9/X70/X90/RS50/60/55/65),21 89 01 52 43 37 33 43 38 0A,C8
+Tint – (X3/X7/X9/X30/X70/X90/RS40/ 50/60/45/55/65),21 89 01 52 43 37 33 39 39 0A,99
+Tint + (X3/X7/X9/X30/X70/X90/RS40/ 50/60/45/55/65),21 89 01 52 43 37 33 39 38 0A,98
+Tint Adj. (Adjustment Bar On/Off toggle),21 89 01 52 43 37 33 31 36 0A,16
+"Tracking – (PC Input)
+(X7/X9/X70/X90/RS50/60/55/65)",21 89 01 52 43 37 33 41 37 0A,A7
+"Tracking + (PC Input)
+(X7/X9/X70/X90/RS50/60/55/65)",21 89 01 52 43 37 33 41 36 0A,A6
+User - Cycles through User 1 - User 5 Picture Modes (X30/X70/X90/RS45/55/65),21 89 01 52 43 37 33 44 37 0A,D7
+"Vertical Position –
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 41 44 0A,AD
+"Vertical Position +
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 41 43 0A,AC
+"Vertical Stretch - Off
+(HD350/550/750/950/990/RS10/15/20/25/35) Anamorphic - Off
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 32 34 0A,24
+"Vertical Stretch - On
+(HD350/550/750/950/990/RS10/15/20/25/35) Anamorphic - A
+(X3/X7/X9/X30/X70/X90/RS40/50/60/45/55/65)",21 89 01 52 43 37 33 32 33 0A,23

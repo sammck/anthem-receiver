@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "anthem-receiver"
+version = "0.0.0"
+description = "Client library to control Anthem receivers over TCP/IP"
+authors = [ "Sam McKelvie <dev@mckelvie.org>" ]
+license = "MIT"
+keywords = [ "Anthem", "receiver", "automation", "theater", "home", "protocol", "video", "Ethernet", "TCP", "SDDP" ]
+readme = "README.md"
+homepage = "https://github.com/sammck/anthem-receiver"
+repository = "https://github.com/sammck/anthem-receiver.git"
+
+
+[tool.poetry.dependencies]
+python = "^3.8"
+typing-extensions = "^4.7.1"
+fastapi = "^0.101.0"
+uvicorn = "^0.23.2"
+python-dotenv = "^1.0.0"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.4.1"
+#dunamai = "^1.9.0"
+python-semantic-release = "^7.25.2"
+types-requests = "^2.31.0.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+anthem-receiver = 'anthem_receiver.__main__:run'
+anthem-receiver-rest-server = 'anthem_receiver.rest_server.__main__:run'
+
+[tool.semantic_release]
+version_variable = 'anthem_receiver/version.py:__version__'
+version_toml = 'pyproject.toml:tool.poetry.version'
+branch = 'main'
+upload_to_pypi = false
+upload_to_release = true
+build_command = "pip install poetry && poetry build"
+
+[tool.mypy]
+exclude = [
+    '^trash/.*$',
+    '^anthem_receiver/protocol/proj.py$',
+]
