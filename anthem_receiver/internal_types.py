@@ -32,6 +32,7 @@ from typing import (
     Mapping,
     MutableMapping,
     Sequence,
+    AsyncIterator,
   )
 
 from types import TracebackType
@@ -49,3 +50,6 @@ else:
 
 JsonableDict = Dict[str, Jsonable]
 """A type hint for a simple JSON-serializable dict; i.e., Dict[str, Jsonable]"""
+
+HostAndPort = Tuple[str, int]
+"""A type hint for a host and port number; i.e., Tuple[str, int]"""

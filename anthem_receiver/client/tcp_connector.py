@@ -52,7 +52,7 @@ class TcpAnthemReceiverConnector(AnthemReceiverConnector):
                       may optionally be prefixed with "tcp://".
                       May be suffixed with ":<port>" to specify a
                       non-default port, which will override the port argument.
-                      May be "sddp://" or "sddp://<host>" to use
+                      May be "dp://" or "dp://<host>" to use
                       SSDP to discover the receiver.
                       If None, the host will be taken from the
                         anthem_receiver_HOST environment variable.
@@ -83,7 +83,7 @@ class TcpAnthemReceiverConnector(AnthemReceiverConnector):
           )
         host = self.config.default_host
         assert host is not None
-        if '://' in host and not host.startswith('tcp://') and not host.startswith('sddp://'):
+        if '://' in host and not host.startswith('tcp://') and not host.startswith('dp://'):
             raise AnthemReceiverError(f"Invalid host protocol specifier for TCP transport: '{host}'")
 
     # @abstractmethod

@@ -9,11 +9,7 @@ PVC Receiver known command codes and metadata.
 This module contains the known command codes and metadata for the Anthem receiver protocol.
 Much of the information in this module is derived from Anthem's documentation here:
 
-https://support.Anthem.com/consumer/support/documents/DILAremoteControlGuide.pdf
-
-For more recent receivers, further information here:
-
-http://pro.Anthem.com/pro/attributes/PRESENT/manual/2018_ILA-FPJ_Ext_Command_List_v1.2.pdf
+https://www.anthemav.com/downloads/MRX-x20-AVM-60-IP-RS-232.xls
 
 There is no protocol implementation here; only metadata about the protocol.
 """
@@ -32,88 +28,45 @@ from .constants import (
   )
 
 class AnthemModel:
-    names: Set[str]
-    """The set of model names that are aliases for this model"""
-
-    default_name: str
-    """The default name for this model. This is the name that will be used when
+    name: str
+    """The name for this model. This is the name that will be used when
        displaying, logging, etc."""
 
-    sddp_name: str
-    """The name provided in the "Model" field by the receiver in its SDDP responses"""
-
-    model_status_payload: bytes = b''
-    """The adanced response payload returned by the receiver in response to a
-       model.query command. Initialized later in this module."""
-
-    def __init__(self, names: List[str]):
-        self.default_name = names[0]
-        self.sddp_name = names[0]
-        self.names = set(names)
+    def __init__(self, name: str):
+        self.name = name
 
     def __str__(self) -> str:
-        return self.default_name
+        return self.name
 
     def __repr__(self) -> str:
-        return f"AnthemModel('{self.default_name}')"
+        return f"AnthemModel('{self.name}')"
 
-_known_models: List[List[str]] = [
-    [ "DLA-HD550", ],
-    [ "DLA-RS20_HD750", "DLA-HD750", "DLA-RS20", ],
-    [ "DLA-RS25_HD950", "DLA-HD950", "DLA-RS25", ],
-    [ "DLA-RS35_HD990", "DLA-HD990", "DLA-RS35", ],
-    [ "DLA-RS40_X3", "DLA-X3", "DLA-RS40", ],
-    [ "DLA-RS50_X7", "DLA-X7", "DLA-RS50", ],
-    [ "DLA-RS60_X9", "DLA-X9", "DLA-RS60", ],
-    [ "DLA-RS45_X30", "DLA-X30", "DLA-RS45", ],
-    [ "DLA-RS55_X70", "DLA-X70", "DLA-X70R", "DLA-RS55", ],
-    [ "DLA-RS65_X90", "DLA-X90", "DLA-X90R", "DLA-RS65"],
-    [ "DLA-RS10", "DLA-RS10U"],
-    [ "DLA-RS15", ],
-    [ "DLA-HD350", ],
-    [ "DLA-RS3000_NX9", "DLA-NX9", "DLA-RS3000", ],
-    [ "DLA-RS4100_NZ9", "DLA-NZ9", "DLA-RS4100", ],
-    [ "DLA-RS3100_NZ8", "DLA-NZ8", "DLA-RS3100", ],
-    [ "DLA-RS2000_NX7", "DLA-NX7", "DLA-RS2000", ],
-    [ "DLA-RS2100_NZ7", "DLA-NZ7", "DLA-RS2100", ],
-    [ "DLA-RS1000_NX5", "DLA-NX5", "DLA-RS1000", ],
-    [ "DLA-RS1100_NP5", "DLA-NP5", "DLA-N5", "DLA-RS1100", ],
+_known_models: List[str] = [
+    "AVM-60",
   ]
-"""A list of lists of receiver models that are known at the time this metadata was
-   defined.  Each sublist is a list of model namess that are known to be the same effective model.
-   The first name in each sublist is one that is advertised via SDDP in the "Model" field, and will
-   be used as the name of the model for display/logging purposes."""
+"""A list of receiver models that are known at the time this metadata was
+   defined."""
 
 models: Dict[str, AnthemModel] = {}
 """A dictionary of receiver models, keyed by model name."""
 
-for _model_names in _known_models:
-    # Expand any DLA-XXX model names into XXX model names for convenience
-    _expanded_model_names = list(_model_names)
-    for _model_name in _model_names:
-        if _model_name.startswith("DLA-"):
-            _expanded_model_names.append(_model_name[4:])
-    _model = AnthemModel(_expanded_model_names)
-    for _model_name in _expanded_model_names:
-        if _model_name in models:
-            raise ValueError(f"Model name associated with multiple AnthemModels: '{_model_name}'")
-        models[_model_name] = _model
+for _model_name in _known_models:
+    _model = AnthemModel(_model_name)
+    models[_model_name] = _model
 
 CommandCode = bytes
-"""A command code. Always a 2-byte byte string."""
+"""A command code. A byte string like b`ZxTBS?` that defines a particular command.
+   Lowercase letters are used for variable bytes in the final command."""
 
 class ResponsePayloadMapper(ABC):
     """An abstract class that maps response payloads to a string representation.
 
        This class is used to map response payloads to a string representation.
        It is used for commands that return a fixed set of response payloads,
-       such as power_status.query, which returns a fixed set of 1-byte payloads
-       that correspond to the power state of the receiver.
+       such as query_tuner_status, which returns an encoded value for the zone.
 
        It can also be used for commands that return a variable set of response
-       queries that can be mapped to a string representation, such as
-       firmware_version_status.query, which returns a 6-byte encoded
-       representation of the firmware version.
+       values that can be mapped to a string representation.
 
        Also provides a reverse mapping from string representations to response
        payloads.
@@ -460,17 +413,17 @@ _fix_model_status_list_map()
 _model_status_map: Dict[bytes, str] = {}
 for _payload, _models_and_default in model_status_list_map.items():
     _models, _default_model = _models_and_default
-    _model_name_list: List[str] = [ _default_model.sddp_name ]
-    for _model_name in sorted([_model.sddp_name for _model in _models]):
-        if _model_name != _default_model.sddp_name:
+    _model_name_list: List[str] = [ _default_model.dp_name ]
+    for _model_name in sorted([_model.dp_name for _model in _models]):
+        if _model_name != _default_model.dp_name:
             _model_name_list.append(_model_name)
     _model_status_map[_payload] = ','.join(_model_name_list)
 
 model_status_map = FixedResponsePayloadMapper(_model_status_map)
 """Response payloads for model_status.query command, and the comma-delimited
-   SDDP receiver model names they correspond to. Only the SDDP name for each
+   AnthemDp receiver model names they correspond to. Only the AnthemDp name for each
    associated model is included. The first model name in each list is the
-   SDDP model name for the default model for that payload.
+   AnthemDp model name for the default model for that payload.
    The model codes are 14 bytes long; the first 10 bytes are always b'ILAFPJ -- '."""
 
 class CommandGroupMeta:
@@ -727,7 +680,7 @@ _group_metas: List[CommandGroupMeta] = [
         # NOTE: Some or all receivers will fail to send a response to the power.on command
         # if the receiver is not in Standby or On state (e.g., if it is Warming or Cooling).
         # Cannot be used to cancel Cooling.
-        _C("on", b'\x31', "Power - On"),
+        _`C("on", b'\x31', "Power - On"),
         # NOTE: Some or all receivers will fail to send a response to the power.off command
         # if the receiver is not in On state (e.g., if it is Standby, Warming or Cooling).
         # Cannot be used to cancel Warming.
@@ -760,7 +713,7 @@ _group_metas: List[CommandGroupMeta] = [
         _C("d", b'\x37', "Gamma - D"),
         _C("custom_1", b'\x34', "Gamma - Custom 1"),
         _C("custom_2", b'\x35', "Gamma - Custom 2"),
-        _C("custom_3", b'\x36', "Gamma - Custom 3"),
+        _C("custom_3", b'\x36', "Gamma - Custom 3"),s
       ]),
     _G("gamma_value", b'\x47\x50', commands=[
         _C("1_8", b'\x30', "Gamma Correction Value - 1.8"),

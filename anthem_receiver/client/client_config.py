@@ -38,7 +38,7 @@ class AnthemReceiverClientConfig:
     stable_power_timeout_secs: float
     idle_disconnect_secs: float
     auto_reconnect: bool
-    cache_sddp: bool
+    cache_dp: bool
     connect_timeout_secs: float
     connect_retry_interval_secs: float
 
@@ -53,7 +53,7 @@ class AnthemReceiverClientConfig:
             stable_power_timeout_secs: Optional[float] = None,
             idle_disconnect_secs: Optional[float] = None,
             auto_reconnect: Optional[bool] = None,
-            cache_sddp: Optional[bool] = None,
+            cache_dp: Optional[bool] = None,
             connect_timeout_secs: Optional[float] = None,
             connect_retry_interval_secs: Optional[float] = None,
             base_config: Optional[AnthemReceiverClientConfig]=None,
@@ -66,7 +66,7 @@ class AnthemReceiverClientConfig:
                    may optionally be prefixed with "tcp://".
                    May be suffixed with ":<port>" to specify a
                    non-default port, which will override the default_port argument.
-                   May be "sddp://" or "sddp://<host>" to use
+                   May be "dp://" or "dp://<host>" to use
                    SSDP to discover the receiver.
                    If None, the default host will be taken from the
                      anthem_receiver_HOST environment variable.
@@ -92,7 +92,7 @@ class AnthemReceiverClientConfig:
                    If None, IDLE_DISCONNECT_TIMOUT is used.
              model:
                    The receiver model. If None, the model will be
-                   inferred if necessary from SDDP, model_status.query,
+                   inferred if necessary from AnthemDp, model_status.query,
                    etc.
              stable_power_timeout_secs:
                    The timeout for the receiver to reach a stable power state
@@ -106,8 +106,8 @@ class AnthemReceiverClientConfig:
                    the base configuration is used. If no base configuration
                    is provided, the default is True.
 
-             cache_sddp:
-                   For sddp:// host names, cache the results of SDDP discovery
+             cache_dp:
+                   For dp:// host names, cache the results of AnthemDp discovery
                    and use them for subsequent connections. If None, the base
                    configuration is used. If no base configuration is provided,
                    the default is True.
@@ -165,8 +165,8 @@ class AnthemReceiverClientConfig:
         if auto_reconnect is not None:
             self.auto_reconnect = auto_reconnect
 
-        if cache_sddp is not None:
-            self.cache_sddp = cache_sddp
+        if cache_dp is not None:
+            self.cache_dp = cache_dp
 
         if connect_timeout_secs is not None:
             self.connect_timeout_secs = connect_timeout_secs
@@ -176,7 +176,7 @@ class AnthemReceiverClientConfig:
 
     def init_from_defaults(self, use_config_file: bool=True) -> None:
         """Initializes the configuration from defaults."""
-        self.default_host = 'sddp://'
+        self.default_host = 'dp://'
         self.default_port = DEFAULT_PORT
         self.password = ''
         self.timeout_secs = DEFAULT_TIMEOUT
@@ -184,7 +184,7 @@ class AnthemReceiverClientConfig:
         self.stable_power_timeout_secs = STABLE_POWER_TIMEOUT
         self.idle_disconnect_secs = IDLE_DISCONNECT_TIMEOUT
         self.auto_reconnect = True
-        self.cache_sddp = True
+        self.cache_dp = True
         self.connect_timeout_secs = CONNECT_TIMEOUT
         self.connect_retry_interval_secs = CONNECT_RETRY_INTERVAL
 
@@ -216,7 +216,7 @@ class AnthemReceiverClientConfig:
         self.stable_power_timeout_secs = base_config.stable_power_timeout_secs
         self.idle_disconnect_secs = base_config.idle_disconnect_secs
         self.auto_reconnect = base_config.auto_reconnect
-        self.cache_sddp = base_config.cache_sddp
+        self.cache_dp = base_config.cache_dp
         self.connect_timeout_secs = base_config.connect_timeout_secs
         self.connect_retry_interval_secs = base_config.connect_retry_interval_secs
 
@@ -230,7 +230,7 @@ class AnthemReceiverClientConfig:
             stable_power_timeout_secs=self.stable_power_timeout_secs,
             idle_disconnect_secs=self.idle_disconnect_secs,
             auto_reconnect=self.auto_reconnect,
-            cache_sddp=self.cache_sddp,
+            cache_dp=self.cache_dp,
             connect_timeout_secs=self.connect_timeout_secs,
             connect_retry_interval_secs=self.connect_retry_interval_secs,
           )
@@ -268,9 +268,9 @@ class AnthemReceiverClientConfig:
         auto_reconnect=jsonable.get('auto_reconnect')
         if auto_reconnect is not None and auto_reconnect != '':
             self.auto_reconnect = bool(auto_reconnect)
-        cache_sddp=jsonable.get('cache_sddp')
-        if cache_sddp is not None and cache_sddp != '':
-            self.cache_sddp = bool(cache_sddp)
+        cache_dp=jsonable.get('cache_dp')
+        if cache_dp is not None and cache_dp != '':
+            self.cache_dp = bool(cache_dp)
         connect_timeout_secs=jsonable.get('connect_timeout_secs')
         if connect_timeout_secs is not None and connect_timeout_secs != '':
             self.connect_timeout_secs = int(connect_timeout_secs)

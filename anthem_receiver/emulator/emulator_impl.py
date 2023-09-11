@@ -12,7 +12,7 @@ Provides a simple emulation of a Anthem receiver on TCP/IP.
 from __future__ import annotations
 
 import asyncio
-import sddp_discovery_protocol as sddp
+import dp_discovery_protocol as dp
 
 from ..internal_types import *
 from ..pkg_logging import logger
@@ -62,13 +62,13 @@ class AnthemReceiverEmulator(AsyncContextManager['AnthemReceiverEmulator']):
 
     warmup_timer: Optional[asyncio.Task[None]] = None
     cooldown_timer: Optional[asyncio.Task[None]] = None
-    sddp_server_task: Optional[asyncio.Task[None]] = None
-    with_sddp: bool
-    sddp_multicast_address: str
-    sddp_port: int
-    sddp_bind_addresses: Optional[List[str]]
-    sddp_headers: Dict[str, Union[str, int, float]]
-    sddp_include_loopback: bool
+    dp_server_task: Optional[asyncio.Task[None]] = None
+    with_dp: bool
+    dp_multicast_address: str
+    dp_port: int
+    dp_bind_addresses: Optional[List[str]]
+    dp_headers: Dict[str, Union[str, int, float]]
+    dp_include_loopback: bool
 
     def __init__(
             self,
@@ -83,12 +83,12 @@ class AnthemReceiverEmulator(AsyncContextManager['AnthemReceiverEmulator']):
             initial_source_status: str = "Signal OK",
             warmup_time: float = EMULATOR_WARMUP_TIME,
             cooldown_time: Optional[float] = None,
-            with_sddp: bool = True,
-            sddp_multicast_address: str=sddp.SDDP_MULTICAST_ADDRESS,
-            sddp_port: int = sddp.SDDP_PORT,
-            sddp_bind_addresses: Optional[Iterable[str]]=['127.0.0.1'],
-            sddp_include_loopback: bool = True,
-            sddp_headers: Optional[Mapping[str, Union[str, int, float]]] = None,
+            with_dp: bool = True,
+            dp_multicast_address: str=dp.ANTHEM_DP_MULTICAST_ADDRESS,
+            dp_port: int = dp.ANTHEM_DP_PORT,
+            dp_bind_addresses: Optional[Iterable[str]]=['127.0.0.1'],
+            dp_include_loopback: bool = True,
+            dp_headers: Optional[Mapping[str, Union[str, int, float]]] = None,
           ):
         if model is None:
             model = 'DLA-NZ8'
@@ -105,54 +105,54 @@ class AnthemReceiverEmulator(AsyncContextManager['AnthemReceiverEmulator']):
         self.final_result = asyncio.get_event_loop().create_future()
         self.warmup_time = warmup_time
         self.cooldown_time = cooldown_time if cooldown_time is not None else warmup_time
-        self.with_sddp = with_sddp
-        self.sddp_multicast_address = sddp_multicast_address
-        self.with_sddp = with_sddp
-        self.sddp_port = sddp_port
-        self.sddp_bind_addresses = None if sddp_bind_addresses is None else list(sddp_bind_addresses)
-        self.sddp_include_loopback = sddp_include_loopback
-        sddp_model_name = self.model.sddp_name
-        self.sddp_headers = {
-            "Driver": f"receiver_nthemKENWOOD_{sddp_model_name}.c4i",
+        self.with_dp = with_dp
+        self.dp_multicast_address = dp_multicast_address
+        self.with_dp = with_dp
+        self.dp_port = dp_port
+        self.dp_bind_addresses = None if dp_bind_addresses is None else list(dp_bind_addresses)
+        self.dp_include_loopback = dp_include_loopback
+        dp_model_name = self.model.dp_name
+        self.dp_headers = {
+            "Driver": f"receiver_nthemKENWOOD_{dp_model_name}.c4i",
             "Host": "anthem_receiver-E0DADC152802",
             "Manufacturer": "AnthemKENWOOD",
-            "Model": sddp_model_name,
+            "Model": dp_model_name,
             "Primary-Proxy": "receiver",
             "Proxies": "receiver",
             "Type": "AnthemKENWOOD:Receiver"
         }
         if self.port != DEFAULT_PORT:
             # A nonstandard header is required to advertise nonstandard ports
-            self.sddp_headers["Port"] = self.port
-        if sddp_headers is not None:
-            self.sddp_headers.update(sddp_headers)
+            self.dp_headers["Port"] = self.port
+        if dp_headers is not None:
+            self.dp_headers.update(dp_headers)
         self.set_power_status_str(initial_power_status)
         self.set_input_status_str(initial_input_status)
         self.set_gamma_table_status_str(initial_gamma_table)
         self.set_gamma_value_status_str(initial_gamma_value)
         self.set_source_status_str(initial_source_status)
 
-    async def _run_sddp_server(self) -> None:
+    async def _run_dp_server(self) -> None:
         try:
-            async with sddp.SddpServer(
-                    device_headers=self.sddp_headers,
-                    multicast_address=self.sddp_multicast_address,
-                    multicast_port=self.sddp_port,
-                    bind_addresses=self.sddp_bind_addresses,
-                    include_loopback=self.sddp_include_loopback,
+            async with dp.AnthemDpServer(
+                    device_headers=self.dp_headers,
+                    multicast_address=self.dp_multicast_address,
+                    multicast_port=self.dp_port,
+                    bind_addresses=self.dp_bind_addresses,
+                    include_loopback=self.dp_include_loopback,
                   ) as server:
                 # This will wait forever unless another task stops the server
                 await server.wait_for_done()
         except asyncio.CancelledError:
-            logger.debug("SDDP server cancelled")
+            logger.debug("AnthemDp server cancelled")
             raise
         except BaseException as e:
-            logger.debug(f"SDDP server error: {e}")
+            logger.debug(f"AnthemDp server error: {e}")
             self.set_final_result(e)
             raise
         else:
-            logger.debug(f"SDDP server stopped prematurely")
-            self.set_final_result(AnthemReceiverError("SDDP server stopped prematurely"))
+            logger.debug(f"AnthemDp server stopped prematurely")
+            self.set_final_result(AnthemReceiverError("AnthemDp server stopped prematurely"))
 
     def _start_one_shot_timer(
             self,
@@ -424,8 +424,8 @@ class AnthemReceiverEmulator(AsyncContextManager['AnthemReceiverEmulator']):
                 port=self.port)
             logger.debug(f"Emulator: Listening on {self.bind_addr}:{self.port}")
             await self.server.start_serving()
-            if self.with_sddp:
-                self.sddp_server_task = asyncio.create_task(self._run_sddp_server())
+            if self.with_dp:
+                self.dp_server_task = asyncio.create_task(self._run_dp_server())
             await self.finish_start()
         except BaseException as e:
             self.set_final_result(e)
@@ -453,15 +453,15 @@ class AnthemReceiverEmulator(AsyncContextManager['AnthemReceiverEmulator']):
                         await self.server.wait_closed()
             finally:
                 self.server = None
-                if self.sddp_server_task is not None:
+                if self.dp_server_task is not None:
                     try:
-                        self.sddp_server_task.cancel()
+                        self.dp_server_task.cancel()
                         try:
-                            await self.sddp_server_task
+                            await self.dp_server_task
                         except asyncio.CancelledError:
                             pass
                     finally:
-                        self.sddp_server_task = None
+                        self.dp_server_task = None
                         if self.handler_task is not None:
                             try:
                                 await self.handler_task
@@ -480,8 +480,8 @@ class AnthemReceiverEmulator(AsyncContextManager['AnthemReceiverEmulator']):
             else:
                 logger.debug(f"Emulator: Setting final exception: {exc}")
                 self.final_result.set_exception(exc)
-            if self.sddp_server_task is not None:
-                self.sddp_server_task.cancel()
+            if self.dp_server_task is not None:
+                self.dp_server_task.cancel()
             if self.warmup_timer is not None:
                 self.warmup_timer.cancel()
                 self.warmup_timer = None

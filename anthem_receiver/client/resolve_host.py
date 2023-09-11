@@ -7,7 +7,7 @@
 Anthem receiver host IP/Port resolver.
 
 Provides a method that can resolve various host pathnames, environment variables,
-SDDP discovery, etc. into a receiver IP address and port.
+AnthemDp discovery, etc. into a receiver IP address and port.
 """
 
 from __future__ import annotations
@@ -29,23 +29,23 @@ from .client_transport import (
   )
 from .client_config import AnthemReceiverClientConfig
 
-_cached_sddp_responses: Dict[str, SddpResponseInfo] = {}
-"""A cache of all known SDDP responses, keyed by SDDP host name."""
+_cached_dp_responses: Dict[str, AnthemDpResponseInfo] = {}
+"""A cache of all known AnthemDp responses, keyed by AnthemDp host name."""
 
-_last_cached_sddp_response: Optional[SddpResponseInfo] = None
-"""The last SDDP response info that was cached."""
+_last_cached_dp_response: Optional[AnthemDpResponseInfo] = None
+"""The last AnthemDp response info that was cached."""
 
-_sddp_cache_mutex: asyncio.Lock = asyncio.Lock()
-"""A mutex to protect the shared SDDP cache."""
+_dp_cache_mutex: asyncio.Lock = asyncio.Lock()
+"""A mutex to protect the shared AnthemDp cache."""
 
-import sddp_discovery_protocol as sddp
-from sddp_discovery_protocol import SddpClient, SddpResponseInfo
+import dp_discovery_protocol as dp
+from dp_discovery_protocol import AnthemDpClient, AnthemDpResponseInfo
 
 async def resolve_receiver_tcp_host(
         host: Optional[str]=None,
         default_port: Optional[int]=None,
         config: Optional[AnthemReceiverClientConfig]=None,
-      ) -> Tuple[str, int, Optional[SddpResponseInfo]]:
+      ) -> Tuple[str, int, Optional[AnthemDpResponseInfo]]:
     """Resolves a receiver host string into a TCP/IP hostname and port.
 
         Args:
@@ -53,21 +53,21 @@ async def resolve_receiver_tcp_host(
                     may optionally be prefixed with "tcp://".
                     May be suffixed with ":<port>" to specify a
                     non-default port, which will override the default_port argument.
-                    May be "sddp://" or "sddp://<sddp-hostname>" to use
+                    May be "dp://" or "dp://<dp-hostname>" to use
                     SSDP to discover the receiver.
                     If None, the default host in config is used.
             default_port: The default TCP/IP port number to use. If None, the port
                     will be taken from the config.
 
         Returns:
-            A tuple of (hostname: str, port: int, sddp_response_info: Optional[SddpResponseInfo]) where:
+            A tuple of (hostname: str, port: int, dp_response_info: Optional[AnthemDpResponseInfo]) where:
                 hostname: The resolved IP address or DNS name.
                 port:     The resolved port number.
-                sddp_response_info:
-                          The SDDP response info, if SDDP was used to
+                dp_response_info:
+                          The AnthemDp response info, if AnthemDp was used to
                           discover the receiver. None otherwise.
     """
-    global _last_cached_sddp_response
+    global _last_cached_dp_response
 
     config = AnthemReceiverClientConfig(
         default_host=host,
@@ -80,41 +80,41 @@ async def resolve_receiver_tcp_host(
     assert default_port is not None
 
     result_host: Optional[str] = None
-    sddp_response_info: Optional[sddp.SddpResponseInfo] = None
+    dp_response_info: Optional[dp.AnthemDpResponseInfo] = None
 
-    if host.startswith('sddp://'):
-        sddp_host: Optional[str] = host[7:]
-        if sddp_host == '':
-            sddp_host = None
-        async with _sddp_cache_mutex:
-            if config.cache_sddp:
-                if sddp_host is None:
-                    if _last_cached_sddp_response is not None:
-                        sddp_response_info = _last_cached_sddp_response
+    if host.startswith('dp://'):
+        dp_host: Optional[str] = host[7:]
+        if dp_host == '':
+            dp_host = None
+        async with _dp_cache_mutex:
+            if config.cache_dp:
+                if dp_host is None:
+                    if _last_cached_dp_response is not None:
+                        dp_response_info = _last_cached_dp_response
                 else:
-                    sddp_response_info = _cached_sddp_responses.get(sddp_host)
-            if sddp_response_info is None:
+                    dp_response_info = _cached_dp_responses.get(dp_host)
+            if dp_response_info is None:
                 filter_headers: Dict[str, str] ={
                     "Manufacturer": "AnthemKENWOOD",
                     "Primary-Proxy": "receiver",
                 }
 
-                async with SddpClient(include_loopback=True) as sddp_client:
-                    async with sddp_client.search(filter_headers=filter_headers) as search_request:
+                async with AnthemDpClient(include_loopback=True) as dp_client:
+                    async with dp_client.search(filter_headers=filter_headers) as search_request:
                         async for response in search_request:
-                            if sddp_host is None or response.datagram.hdr_host == sddp_host:
-                                sddp_response_info = response
+                            if dp_host is None or response.datagram.hdr_host == dp_host:
+                                dp_response_info = response
                                 break
                         else:
-                            raise AnthemReceiverError("SDDP discovery failed to find a receiver")
+                            raise AnthemReceiverError("AnthemDp discovery failed to find a receiver")
 
-                assert sddp_response_info is not None
-                _last_cached_sddp_response = sddp_response_info
-                sddp_hostname = sddp_response_info.datagram.hdr_host
-                if sddp_hostname is not None:
-                    _cached_sddp_responses[sddp_hostname] = sddp_response_info
-        result_host = sddp_response_info.src_addr[0]
-        optional_port = sddp_response_info.datagram.headers.get('Port')
+                assert dp_response_info is not None
+                _last_cached_dp_response = dp_response_info
+                dp_hostname = dp_response_info.datagram.hdr_host
+                if dp_hostname is not None:
+                    _cached_dp_responses[dp_hostname] = dp_response_info
+        result_host = dp_response_info.src_addr[0]
+        optional_port = dp_response_info.datagram.headers.get('Port')
         if optional_port is None:
             port = default_port
         else:
@@ -129,4 +129,4 @@ async def resolve_receiver_tcp_host(
             port = default_port
         result_host = host
 
-    return (result_host, port, sddp_response_info)
+    return (result_host, port, dp_response_info)

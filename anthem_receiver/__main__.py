@@ -30,10 +30,10 @@ from anthem_receiver import (
     full_class_name,
   )
 
-from sddp_discovery_protocol import (
-    SddpClient,
-    SddpSearchRequest,
-    SddpResponseInfo,
+from dp_discovery_protocol import (
+    AnthemDpClient,
+    AnthemDpSearchRequest,
+    AnthemDpResponseInfo,
   )
 
 class CmdExitError(RuntimeError):
@@ -68,7 +68,7 @@ class CommandHandler:
         print("A command is required", file=sys.stderr)
         return 1
 
-    async def discover_receiver(self, bind_addresses: Optional[List[str]]=None) -> Optional[SddpResponseInfo]:
+    async def discover_receiver(self, bind_addresses: Optional[List[str]]=None) -> Optional[AnthemDpResponseInfo]:
         if not bind_addresses is None and len(bind_addresses) == 0:
             bind_addresses = None
         filter_headers: Dict[str, Union[str, int]] ={
@@ -76,8 +76,8 @@ class CommandHandler:
             "Primary-Proxy": "receiver",
           }
 
-        async with SddpClient(bind_addresses=bind_addresses, include_loopback=True) as client:
-            async with SddpSearchRequest(
+        async with AnthemDpClient(bind_addresses=bind_addresses, include_loopback=True) as client:
+            async with AnthemDpSearchRequest(
                     client,
                     filter_headers=filter_headers,
               ) as search_request:
@@ -221,7 +221,7 @@ class CommandHandler:
 
         # ======================= find-ip
 
-        parser_search = subparsers.add_parser('find-ip', description="Use the SDDP protocol to find the IP address of a Anthem receiver on the local subnet")
+        parser_search = subparsers.add_parser('find-ip', description="Use the AnthemDp protocol to find the IP address of a Anthem receiver on the local subnet")
         parser_search.add_argument('-b', '--bind', dest="bind_addresses", action='append', default=[],
                             help='''The local unicast IP address to bind to on the desired subnet. May be repeated. Default: all local non-loopback unicast addresses.''')
         parser_search.set_defaults(func=self.cmd_find_ip)
