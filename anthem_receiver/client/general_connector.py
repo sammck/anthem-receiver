@@ -52,9 +52,9 @@ class GeneralAnthemReceiverConnector(AnthemReceiverConnector):
                       May be suffixed with ":<port>" to specify a
                       non-default port, which will override the port argument.
                       May be "dp://" or "dp://<host>" to use
-                      SSDP to discover the receiver.
+                      Anthem Discovery Protocol to discover the receiver.
                       If None, the host will be taken from the
-                        anthem_receiver_HOST environment variable.
+                        ANTHEM_RECEIVER_HOST environment variable.
                 password:
                         The password to use to authenticate with the receiver.
                         If None, the password will be taken from the

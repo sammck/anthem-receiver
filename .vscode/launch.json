@@ -10,6 +10,16 @@
             "request": "launch",
             "module": "anthem_receiver",
             "args": [ ]
-        }
-    ]
+        },
+        {
+          "name": "import_serial_commands",
+          "type": "python",
+          "request": "launch",
+          "console": "integratedTerminal",
+          "justMyCode": false,
+          "program": "${workspaceFolder}/scripts/import_serial_commands.py",
+          "args": [
+          ]
+      }
+  ]
 }

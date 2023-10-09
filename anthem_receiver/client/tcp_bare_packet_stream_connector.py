@@ -14,32 +14,27 @@ from __future__ import annotations
 
 import os
 import asyncio
+import time
 from asyncio import Future
 from abc import ABC, abstractmethod
 
 from ..internal_types import *
 from ..exceptions import AnthemReceiverError
-from ..constants import DEFAULT_TIMEOUT, DEFAULT_PORT
 from ..pkg_logging import logger
-from ..protocol import Packet, PJ_OK, PJREQ, PJACK, PJNAK
-from .connector import AnthemReceiverConnector
-from .client_transport import (
-    AnthemReceiverClientTransport,
-    ResponsePackets
-  )
+from ..protocol_impl import BarePacketStreamTransport
 from .client_config import AnthemReceiverClientConfig
+from .bare_packet_stream_connector import BarePacketStreamConnector
+from .resolve_host import resolve_receiver_tcp_host
+from ..protocol_impl import BarePacketStreamTransport
 
-from .tcp_client_transport import TcpAnthemReceiverClientTransport
-
-class TcpAnthemReceiverConnector(AnthemReceiverConnector):
-    """Anthem receiver TCP/IP client transport connector."""
+class TcpBarePacketStreamConnector(BarePacketStreamConnector):
+    """Anthem receiver TCP/IP client bare packet transport connector."""
 
     config: AnthemReceiverClientConfig
 
     def __init__(
             self,
             host: Optional[str]=None,
-            password: Optional[str]=None,
             port: Optional[int]=None,
             timeout_secs: Optional[float] = None,
             config: Optional[AnthemReceiverClientConfig]=None,
@@ -56,12 +51,6 @@ class TcpAnthemReceiverConnector(AnthemReceiverConnector):
                       Anthem Discovery Protocol to discover the receiver.
                       If None, the host will be taken from the
                         ANTHEM_RECEIVER_HOST environment variable.
-                password:
-                      The receiver password. If None, the password
-                      will be taken from the anthem_receiver_PASSWORD
-                      environment variable. If an empty string or the
-                      environment variable is not found, no password
-                      will be used.
                 port: The default TCP/IP port number to use. If None, the port
                       will be taken from the ANTHEM_RECEIVER_PORT. If that
                       environment variable is not found, the default Anthem
@@ -78,7 +67,6 @@ class TcpAnthemReceiverConnector(AnthemReceiverConnector):
             default_host=host,
             default_port=port,
             timeout_secs=timeout_secs,
-            password=password,
             base_config=config
           )
         host = self.config.default_host
@@ -87,18 +75,46 @@ class TcpAnthemReceiverConnector(AnthemReceiverConnector):
             raise AnthemReceiverError(f"Invalid host protocol specifier for TCP transport: '{host}'")
 
     # @abstractmethod
-    async def connect(self) -> AnthemReceiverClientTransport:
+    async def connect(self) -> BarePacketStreamTransport:
         """Create and initialize (including handshake and authentication)
            a TCP/IP client transport for the receiver associated with this
            connector.
         """
-        transport = TcpAnthemReceiverClientTransport(config=self.config)
-        await transport.connect()
-        # on error, the transport will be shut down, and no further interaction is possible
+
+        resolved_host, resolved_port, _ = await resolve_receiver_tcp_host(
+            config=self.config)
+        logger.debug(f"Connecting to receiver at {resolved_host}:{resolved_port}")
+        connect_end_time = time.monotonic() + self.config.connect_timeout_secs
+        while True:
+            next_retry_time = min(
+                connect_end_time,
+                time.monotonic() + self.config.connect_retry_interval_secs)
+            try:
+                wait_time = max(connect_end_time - time.monotonic(), 0.25)
+                logger.info(f"Trying receiver connect to {resolved_host}:{resolved_port} with timeout={wait_time}")
+                reader, writer = await asyncio.wait_for(
+                    asyncio.open_connection(resolved_host, resolved_port),
+                    timeout=wait_time)
+                break
+            except ConnectionRefusedError as e:
+                # If the receiver is servicing another client, it will refuse
+                # the connection. We retry until the timeout expires.
+                if time.monotonic() >= connect_end_time:
+                    raise
+                else:
+                    retry_sleep_time = next_retry_time - time.monotonic()
+                    if retry_sleep_time > 0:
+                        logger.debug(f"Connection refused, sleeping for {retry_sleep_time} seconds")
+                        await asyncio.sleep(retry_sleep_time)
+                    logger.debug("Connection refused, retrying")
+            except asyncio.TimeoutError as e:
+                logger.debug("Timeout connecting to receiver")
+
+        transport = BarePacketStreamTransport(reader, writer)
         return transport
 
     def __str__(self) -> str:
-        return f"TcpAnthemReceiverConnector(host='{self.config.default_host}', port={self.config.default_port})"
+        return f"TcpBarePacketStreamConnector(host='{self.config.default_host}', port={self.config.default_port})"
 
     def __repr__(self) -> str:
         return str(self)

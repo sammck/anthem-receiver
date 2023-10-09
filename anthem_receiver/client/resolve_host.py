@@ -12,22 +12,18 @@ AnthemDp discovery, etc. into a receiver IP address and port.
 
 from __future__ import annotations
 
-import os
 import asyncio
-from asyncio import Future
-from abc import ABC, abstractmethod
 
 from ..internal_types import *
 from ..exceptions import AnthemReceiverError
 from ..constants import DEFAULT_TIMEOUT, DEFAULT_PORT
 from ..pkg_logging import logger
-from ..protocol import Packet, PJ_OK, PJREQ, PJACK, PJNAK
 
 from .client_transport import (
-    AnthemReceiverClientTransport,
     ResponsePackets
   )
 from .client_config import AnthemReceiverClientConfig
+from ..discovery import AnthemDpSearchRequest, AnthemDpResponseInfo, AnthemDpClient
 
 _cached_dp_responses: Dict[str, AnthemDpResponseInfo] = {}
 """A cache of all known AnthemDp responses, keyed by AnthemDp host name."""
@@ -38,8 +34,7 @@ _last_cached_dp_response: Optional[AnthemDpResponseInfo] = None
 _dp_cache_mutex: asyncio.Lock = asyncio.Lock()
 """A mutex to protect the shared AnthemDp cache."""
 
-import dp_discovery_protocol as dp
-from dp_discovery_protocol import AnthemDpClient, AnthemDpResponseInfo
+from ..discovery import AnthemDpClient, AnthemDpResponseInfo
 
 async def resolve_receiver_tcp_host(
         host: Optional[str]=None,
@@ -54,7 +49,7 @@ async def resolve_receiver_tcp_host(
                     May be suffixed with ":<port>" to specify a
                     non-default port, which will override the default_port argument.
                     May be "dp://" or "dp://<dp-hostname>" to use
-                    SSDP to discover the receiver.
+                    Anthem Discovery Protocol to discover the receiver.
                     If None, the default host in config is used.
             default_port: The default TCP/IP port number to use. If None, the port
                     will be taken from the config.
@@ -80,46 +75,46 @@ async def resolve_receiver_tcp_host(
     assert default_port is not None
 
     result_host: Optional[str] = None
-    dp_response_info: Optional[dp.AnthemDpResponseInfo] = None
+    dp_response_info: Optional[AnthemDpResponseInfo] = None
 
     if host.startswith('dp://'):
-        dp_host: Optional[str] = host[7:]
-        if dp_host == '':
-            dp_host = None
+        dp_device_name: Optional[str] = host[5:]
+        if dp_device_name == '':
+            dp_device_name = None
         async with _dp_cache_mutex:
             if config.cache_dp:
-                if dp_host is None:
+                if dp_device_name is None:
                     if _last_cached_dp_response is not None:
                         dp_response_info = _last_cached_dp_response
                 else:
-                    dp_response_info = _cached_dp_responses.get(dp_host)
+                    dp_response_info = _cached_dp_responses.get(dp_device_name)
             if dp_response_info is None:
-                filter_headers: Dict[str, str] ={
-                    "Manufacturer": "AnthemKENWOOD",
-                    "Primary-Proxy": "receiver",
-                }
-
-                async with AnthemDpClient(include_loopback=True) as dp_client:
-                    async with dp_client.search(filter_headers=filter_headers) as search_request:
-                        async for response in search_request:
-                            if dp_host is None or response.datagram.hdr_host == dp_host:
-                                dp_response_info = response
-                                break
-                        else:
-                            raise AnthemReceiverError("AnthemDp discovery failed to find a receiver")
-
-                assert dp_response_info is not None
+                response_wait_time: float = 1.0 if dp_device_name is None else 4.0
+                async with AnthemDpClient(response_wait_time=response_wait_time) as client:
+                    result: Optional[AnthemDpResponseInfo] = None
+                    async with AnthemDpSearchRequest(
+                            client,
+                            response_wait_time=response_wait_time,
+                        ) as search_request:
+                        async for info in search_request.iter_responses():
+                            if dp_device_name is None:
+                                if result is not None:
+                                    raise RuntimeError(f"Multiple receivers found for {host}: {result} and {info}")
+                                result = info
+                            else:
+                                if info.datagram.device_name == dp_device_name:
+                                    assert result is None
+                                    result = info
+                                    break
+                if result is None:
+                    raise RuntimeError("No receiver found" if dp_device_name is None else f"No receiver found with name {dp_device_name!r}")
+                dp_response_info = result
                 _last_cached_dp_response = dp_response_info
-                dp_hostname = dp_response_info.datagram.hdr_host
-                if dp_hostname is not None:
-                    _cached_dp_responses[dp_hostname] = dp_response_info
-        result_host = dp_response_info.src_addr[0]
-        optional_port = dp_response_info.datagram.headers.get('Port')
-        if optional_port is None:
-            port = default_port
-        else:
-            port = int(optional_port)
-    else:
+                if dp_device_name is not None:
+                    _cached_dp_responses[dp_device_name] = dp_response_info
+        result_host = dp_response_info.src_address[0]
+        port = dp_response_info.datagram.tcp_port
+    elif host.startswith('tcp://') or not '/' in host:
         if host.startswith('tcp://'):
             host = host[6:]
         if ':' in host:
@@ -128,5 +123,7 @@ async def resolve_receiver_tcp_host(
         else:
             port = default_port
         result_host = host
+    else:
+        raise AnthemReceiverError(f"Invalid host specifier for TCP transport: '{host}'")
 
     return (result_host, port, dp_response_info)

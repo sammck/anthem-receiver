@@ -9,7 +9,7 @@ version: "3.3"
 #  Environment Variables:
 #    APP_NAME                   The app name used for the path prefix  ("http(s)://hostname>/${APP_NAME}/"). Defaults to anthem-receiver
 #
-#    anthem_receiver_HOST         The hostname or LAN IP address of the Anthem receiver. Required, because AnthemDp
+#    ANTHEM_RECEIVER_HOST         The hostname or LAN IP address of the Anthem receiver. Required, because AnthemDp
 #                               will not work behind Docker's NAT.
 #
 #    anthem_receiver_PASSWORD     The password used to authenticate requests to the Anthem receiver.
@@ -79,7 +79,7 @@ services:
 
     environment:
       - "anthem_receiver_PASSWORD=${anthem_receiver_PASSWORD:-}"
-      - "anthem_receiver_HOST=${anthem_receiver_HOST:-}"
+      - "ANTHEM_RECEIVER_HOST=${ANTHEM_RECEIVER_HOST:-}"
 
     command:
       - "/app/.venv/bin/uvicorn"

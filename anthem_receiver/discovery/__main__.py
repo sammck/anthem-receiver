@@ -13,6 +13,7 @@ import json
 import base64
 import asyncio
 import logging
+import dotenv
 from signal import SIGINT, SIGTERM
 
 from anthem_receiver.internal_types import *
@@ -263,5 +264,5 @@ async def arun(argv: Optional[Sequence[str]]=None) -> int:
 
 # allow running with "python3 -m", or as a standalone script
 if __name__ == "__main__":
+    dotenv.load_dotenv()
     sys.exit(run())
-

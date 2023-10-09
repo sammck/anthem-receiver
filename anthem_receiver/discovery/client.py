@@ -66,6 +66,11 @@ class AnthemDpResponseInfo:
         self.monotonic_time = time.monotonic()
         self.utc_time = datetime.datetime.utcnow()
 
+    def __str__(self) -> str:
+        return f"AnthemDpResponse(addr={self.src_addr}, {self.datagram})"
+
+    def __repr__(self) -> str:
+        return str(self)
 class AnthemDpSearchRequest(
         AsyncContextManager['AnthemDpSearchRequest'],
         AsyncIterable[AnthemDpResponseInfo]

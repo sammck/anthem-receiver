@@ -18,12 +18,19 @@ uvicorn = "^0.23.2"
 python-dotenv = "^1.0.0"
 netifaces-plus = "^0.12.0"
 requests = "^2.31.0"
+aioconsole = "^0.6.2"
+colorama = "^0.4.6"
+aenum = "^3.1.15"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.4.1"
 #dunamai = "^1.9.0"
 python-semantic-release = "^7.25.2"
 types-requests = "^2.31.0.2"
+
+
+[tool.poetry.group.gui.dependencies]
+aiotkinter = "^0.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -15,7 +15,7 @@ from .internal_types import Jsonable, JsonableDict
 
 from .exceptions import AnthemReceiverError
 
-from .constants import DEFAULT_PORT, DEFAULT_TIMEOUT, STABLE_POWER_TIMEOUT
+from .constants import DEFAULT_PORT, DEFAULT_TIMEOUT
 
 from .internal_types import Jsonable, JsonableDict
 

@@ -4,14 +4,8 @@
 #
 
 """
-PVC Receiver known command codes and metadata.
+Base classes for defining command metadata.
 
-This module contains the known command codes and metadata for the Anthem receiver protocol.
-Much of the information in this module is derived from Anthem's documentation here:
-
-https://www.anthemav.com/downloads/MRX-x20-AVM-60-IP-RS-232.xls
-
-There is no protocol implementation here; only metadata about the protocol.
 """
 from __future__ import annotations
 
@@ -22,54 +16,22 @@ from ..pkg_logging import logger
 from ..internal_types import *
 from ..exceptions import AnthemReceiverError
 from .constants import (
-    PacketType,
-    PACKET_MAGIC,
     END_OF_PACKET_BYTES,
   )
 
-class AnthemModel:
-    name: str
-    """The name for this model. This is the name that will be used when
-       displaying, logging, etc."""
+class ZonedCommandMixin:
+    """A mixin class for commands that are zoned, i.e. that have a zone parameter."""
+    zone: int
+    """The zone number for this command."""
 
-    def __init__(self, name: str):
-        self.name = name
+    def __init__(self, zone: int) -> None:
+        self.zone = zone
 
     def __str__(self) -> str:
-        return self.name
+        return f"{self.__class__.__name__}(zone={self.zone})"
 
     def __repr__(self) -> str:
-        return f"AnthemModel('{self.name}')"
-
-_known_models: List[str] = [
-    "AVM-60",
-  ]
-"""A list of receiver models that are known at the time this metadata was
-   defined."""
-
-models: Dict[str, AnthemModel] = {}
-"""A dictionary of receiver models, keyed by model name."""
-
-for _model_name in _known_models:
-    _model = AnthemModel(_model_name)
-    models[_model_name] = _model
-
-class PacketMeta:
-
-    id: str
-    """3-letter Command/response code"""
-
-    description: str
-    """Description of the command/response"""
-
-    includes_zone: bool
-    """True iff the command/response includes a "Zx" zone number prefix"""
-
-    includes_tuner: bool
-    """True iff the command/response includes a "Tx" tuner number prefix"""
-
-    includes_trigger: bool
-    """True iff the command/response includes a "Rx" trigger number prefix"""
+        return str(self)
 
 
 CommandCode = bytes

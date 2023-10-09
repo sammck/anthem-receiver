@@ -242,7 +242,7 @@ class CommandHandler:
 
         parser_exec = subparsers.add_parser('exec', description="Execute one or more commands in the receiver.")
         parser_exec.add_argument('--host', default=None,
-                            help='''The receiver host address. Default: use env var anthem_receiver_HOST.''')
+                            help='''The receiver host address. Default: use env var ANTHEM_RECEIVER_HOST.''')
         parser_exec.add_argument("--port", default=DEFAULT_PORT, type=int,
             help=f"Default receiver port number to connect to. Default: {DEFAULT_PORT}")
         parser_exec.add_argument("-p", "--password", default=None,
