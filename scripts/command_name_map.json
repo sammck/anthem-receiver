@@ -2,6 +2,7 @@
   "commands": {
     "IDQ?": {
       "command_name": "IDQ?",
+      "name": "device_info",
       "description": "Query model and firmware version. returns IDQ followed by model, software version, region, software build date e.g. \"IDQAVM 60 US 0.9.5Jun 15 2020\"",
       "related_query_description": "",
       "fields": [
@@ -31,6 +32,7 @@
     },
     "IDM?": {
       "command_name": "IDM?",
+      "name": "device_model",
       "description": "Query model. returns IDM followed by model e.g. \"IDMAVM 60\"",
       "related_query_description": "",
       "fields": [
@@ -60,6 +62,7 @@
     },
     "IDS?": {
       "command_name": "IDS?",
+      "name": "device_firmware_version",
       "description": "Query software version. returns IDS followed by software version e.g. \"IDS0.9.5\"",
       "related_query_description": "",
       "fields": [
@@ -89,6 +92,7 @@
     },
     "IDR?": {
       "command_name": "IDR?",
+      "name": "device_region",
       "description": "Query region. returns IDR followed by region e.g. \"IDRUS \"",
       "related_query_description": "",
       "fields": [
@@ -118,6 +122,7 @@
     },
     "IDB?": {
       "command_name": "IDB?",
+      "name": "device_build_date",
       "description": "Query software build date. returns IDB followed by software build date e.g. \"IDBJun 15 2020\"",
       "related_query_description": "",
       "fields": [
@@ -147,6 +152,7 @@
     },
     "IDH?": {
       "command_name": "IDH?",
+      "name": "device_hardware_version",
       "description": "Query hardware version. returns IDH followed by hardware version e.g. \"IDH1\"",
       "related_query_description": "",
       "fields": [
@@ -178,6 +184,7 @@
     },
     "IDN?": {
       "command_name": "IDN?",
+      "name": "device_mac_address",
       "description": "Query MCU MAC Address. returns IDN followed by the unit's unique address e.g. \"IDN7CB77B014FE5\"",
       "related_query_description": "",
       "fields": [
@@ -207,6 +214,7 @@
     },
     "ECHx": {
       "command_name": "ECHx",
+      "name": "report_enable",
       "description": "Tx status set. x=0 off, x=1 on (report running changes to any settings marked as Report)",
       "related_query_description": "ECH? returns ECHx",
       "fields": [
@@ -235,6 +243,7 @@
     },
     "FPBx": {
       "command_name": "FPBx",
+      "name": "front_panel_brightness",
       "description": "Front panel brightness: 0=off, 1=low, 2=medium, 3=high, n=cycle to next",
       "related_query_description": "FPB? returns FPBx (x=0-3)",
       "fields": [
@@ -260,6 +269,7 @@
     },
     "SDVSxxy": {
       "command_name": "SDVSxxy",
+      "name": "dolby_volume_enable",
       "description": "Set Dolby Volume off (y=0) or on (y=1) for the Input # xx (xx=00-ZZ where ZZ is the number of active input configurations, 00=the current input).",
       "related_query_description": "SDVSxx? returns SDVSxxy",
       "fields": [
@@ -299,6 +309,7 @@
     },
     "SDVLxxy": {
       "command_name": "SDVLxxy",
+      "name": "dolby_volume_level",
       "description": "Set Dolby Volume Leveler to y (0=off, 1-9) for the Input # xx (xx=00-ZZ where ZZ is the number of active input configurations, 00=the current input).",
       "related_query_description": "SDVLxx? returns SDVLxxy",
       "fields": [
@@ -338,6 +349,7 @@
     },
     "SLIPxxyyy": {
       "command_name": "SLIPxxyyy",
+      "name": "lip_sync_delay",
       "description": "Set Lip Sync to yyy (0-150) ms for the Input # xx (xx=00-ZZ where ZZ is the number of active input configurations, 00=the current input).  Step must be in increments of 5ms or error will result.",
       "related_query_description": "SLIPxx? returns SLIPxxyyy",
       "fields": [
@@ -377,6 +389,7 @@
     },
     "SIPx": {
       "command_name": "SIPx",
+      "name": "standby_ip_control_enable",
       "description": "Set Standby IP Control to Disabled (x=0) or Enabled (x=1). This must be enabled for the power-on command to operate via IP. With serial control, the power-on command need not be sent twice (once for wake-up) when this setting is enabled. Note that sending SIP1 disables ECO mode.",
       "related_query_description": "SIP? returns SIPx",
       "fields": [
@@ -405,6 +418,7 @@
     },
     "SSPxxy": {
       "command_name": "SSPxxy",
+      "name": "speaker_profile",
       "description": "Set Speaker Profile to # y for profile 1 (y=1), profile 2 (y=2), profile 3 (y=3) and profile 4 (y=4) for the Input # xx (xx=00-ZZ where ZZ is the number of active input configurations, 00= the current input).",
       "related_query_description": "SSPxx? returns SSPxxy",
       "fields": [
@@ -444,6 +458,7 @@
     },
     "SPNy?": {
       "command_name": "SPNy?",
+      "name": "speaker_profile_name",
       "description": "Query the Speaker Profile name of the specified profile # y for profile 1 (y=1), profile 2 (y=2), profile 3 (y=3) and profile 4 (y=4). SPNy? Returns SNPyzzzzzzzz where zzzzzzzz= Profile Name in ASCII as set in the setup menu",
       "related_query_description": "",
       "fields": [
@@ -484,6 +499,7 @@
     },
     "ZxPOWy": {
       "command_name": "ZxPOWy",
+      "name": "power",
       "description": "Power. x=zone: 0 (all), 1 (main), 2 (where applicable), 3 (where applicable).  y: 0=off, 1=on.  When unit is in ECO standby mode (see product manual), it may be necessary to send the power-on command twice. Ex:\"Z0POW1;Z0POW1;\". The first instance is the wake-up from low-power state. Note that Zx=Z0 applies only to power command.",
       "related_query_description": "ZxPOW? returns ZxPOWy. Z0POW? returns Z0POW?",
       "fields": [
@@ -518,6 +534,7 @@
     },
     "ICN?": {
       "command_name": "ICN?",
+      "name": "num_input_configurations",
       "description": "Query number of active input configurations that the system supports. returns ICNyy e.g. \"ICN9\" for a system with 9 active inputs",
       "related_query_description": "",
       "fields": [
@@ -546,6 +563,7 @@
     },
     "ISNyy?": {
       "command_name": "ISNyy?",
+      "name": "input_short_name",
       "description": "Query the short input name of the input yy=01-ZZ.. returns 'ISNyyzzzz' where 'zzzz'= Input name as set in the setup menu. Maximum length of the short input name is 8 ASCII characters.",
       "related_query_description": "",
       "fields": [
@@ -586,6 +604,7 @@
     },
     "ILNyy?": {
       "command_name": "ILNyy?",
+      "name": "input_long_name",
       "description": "Query the long input name of the input yy=01-ZZ.. returns 'ILNyyzzzz' where 'zzzz'= Input name as set in the setup menu. Maximum length of the long input name is 16 ASCII characters (not applicable to MRX x10).",
       "related_query_description": "",
       "fields": [
@@ -626,6 +645,7 @@
     },
     "ZxINPyy": {
       "command_name": "ZxINPyy",
+      "name": "input_select",
       "description": "Input Select: yy=01-ZZ. Where ZZ is the number of active input configurations for the specified zone. Eg: 'Z1INP9' would select the 9th input in the main zone. When selecting an input that has no input connector assigned to Z2 the MRX x10 will silently ignore the input select command.",
       "related_query_description": "ZxINP? returns ZxINPyy  e.g. \"Z1INP10\".",
       "fields": [
@@ -659,6 +679,7 @@
     },
     "ZxVUPyy": {
       "command_name": "ZxVUPyy",
+      "name": "volume_up",
       "description": "Volume up: y=dB step: 0 to 10, m=minimum according to model. Entry is rounded to nearest valid value",
       "related_query_description": "",
       "fields": [
@@ -688,6 +709,7 @@
     },
     "ZxVDNyy": {
       "command_name": "ZxVDNyy",
+      "name": "volume_down",
       "description": "Volume down: y=dB step: 0 to 10, m=minimum according to model. Entry is rounded to nearest valid value.",
       "related_query_description": "",
       "fields": [
@@ -717,6 +739,7 @@
     },
     "ZxVOLsyy": {
       "command_name": "ZxVOLsyy",
+      "name": "volume_level",
       "description": "Volume setting: s=sign: +/-, yy=value.  Example: Z1VOL-35 represents main zone volume set to -35 dB.  Entry is rounded to nearest valid value.",
       "related_query_description": "ZxVOL? returns ZxVOLsyy",
       "fields": [
@@ -750,6 +773,7 @@
     },
     "ZxMUTy": {
       "command_name": "ZxMUTy",
+      "name": "mute",
       "description": "Mute: 0=unmute, 1=mute, t=toggle",
       "related_query_description": "ZxMUT? returns ZxMUTy (y=0-1)",
       "fields": [
@@ -785,6 +809,7 @@
     },
     "ZxARCy": {
       "command_name": "ZxARCy",
+      "name": "arc_enable",
       "description": "Turn ARC (Anthem Room Correction) off (y=0) or on (y=1) for the specified zone (currently ARC is only available on the Main zone, x=1)",
       "related_query_description": "ZxARC? returns ZxARCy (y=0-1)",
       "fields": [
@@ -818,6 +843,7 @@
     },
     "Z1BLTyyy": {
       "command_name": "Z1BLTyyy",
+      "name": "balance_left",
       "description": "Balance all channels to left: y= %: 0 to 100, m=minimum according to model. Entry is rounded to nearest valid value.",
       "related_query_description": "",
       "fields": [
@@ -847,6 +873,7 @@
     },
     "Z1BRTyyy": {
       "command_name": "Z1BRTyyy",
+      "name": "balance_right",
       "description": "Balance all channels to right: y= %: 0 to 100, m=minimum according to model. Entry is rounded to nearest valid value.",
       "related_query_description": "",
       "fields": [
@@ -876,6 +903,7 @@
     },
     "Z1BALyyy": {
       "command_name": "Z1BALyyy",
+      "name": "balance",
       "description": "Balance setting: yyy=% 0 to 100. Example: Z1BAL100 represents balance completely to the right. Z1BAL0 represents balance completely to the left. Z1BAL50 is balance in the middle. Entry is rounded to nearest valid value.",
       "related_query_description": "Z1BAL? returns Z1BALyyy",
       "fields": [
@@ -909,6 +937,7 @@
     },
     "Z1LUPyzz": {
       "command_name": "Z1LUPyzz",
+      "name": "channel_level_up",
       "description": "Level up: y=channels: 0=subs, 1=fronts, 2=center, 3=surrounds, 4=backs, 5=LFE, 6=Heights1, 7=Heights2.  z=dB step: 0 to 10, m=minimum according to model",
       "related_query_description": "",
       "fields": [
@@ -949,6 +978,7 @@
     },
     "Z1LDNyzz": {
       "command_name": "Z1LDNyzz",
+      "name": "channel_level_down",
       "description": "Level down: y=channels: 0=subs, 1=fronts, 2=center, 3=surrounds, 4=backs, 5=LFE, 6=Heights1, 7=Heights2. y=dB step: 0 to 10, m=minimum according to model",
       "related_query_description": "",
       "fields": [
@@ -989,6 +1019,7 @@
     },
     "Z1LEVyszz": {
       "command_name": "Z1LEVyszz",
+      "name": "channel_level",
       "description": "Level setting: y=Channels: 0=subs, 1=fronts, 2=center, 3=surrounds, 4=backs, 5=LFE, 6=Heights1, 7=Heights2. s=sign: +/-, zz=value.  Example: Z1LEV1+01 represents fronts boosted by 1 dB.  Entry is rounded to nearest valid value. Subs, fronts, center, surrounds, backs have range -10 dB to +10 dB. LFE has range -10 dB to 0 dB.",
       "related_query_description": "Z1LEVy? returns Z1LEVyszz",
       "fields": [
@@ -1033,6 +1064,7 @@
     },
     "Z1TUPyzz": {
       "command_name": "Z1TUPyzz",
+      "name": "tone_up",
       "description": "Tone up: y=0 bass, 1 treble, zz=dB step: 0 to 10, m=minimum according to model.",
       "related_query_description": "",
       "fields": [
@@ -1073,6 +1105,7 @@
     },
     "Z1TDNyzz": {
       "command_name": "Z1TDNyzz",
+      "name": "tone_down",
       "description": "Tone down: y=0 bass, 1 treble, zz=dB step: 0 to 10, m=minimum according to model.",
       "related_query_description": "",
       "fields": [
@@ -1113,6 +1146,7 @@
     },
     "Z1TONyszz": {
       "command_name": "Z1TONyszz",
+      "name": "tone",
       "description": "Tone setting: y=0 bass, 1 treble.  s=sign: +/-, zz=value.  Example: Z1TON0-01 represents a bass cut by 1 dB.",
       "related_query_description": "Z1TONy? returns Z1TONyszz",
       "fields": [
@@ -1157,6 +1191,7 @@
     },
     "T1TUP": {
       "command_name": "T1TUP",
+      "name": "tuner_tune_up",
       "description": "Tune up",
       "related_query_description": "",
       "fields": [
@@ -1175,6 +1210,7 @@
     },
     "T1TDN": {
       "command_name": "T1TDN",
+      "name": "tuner_tune_down",
       "description": "Tune down",
       "related_query_description": "",
       "fields": [
@@ -1193,6 +1229,7 @@
     },
     "T1KUP": {
       "command_name": "T1KUP",
+      "name": "tuner_seek_up",
       "description": "Seek up",
       "related_query_description": "",
       "fields": [
@@ -1211,6 +1248,7 @@
     },
     "T1KDN": {
       "command_name": "T1KDN",
+      "name": "tuner_seek_down",
       "description": "Seek down",
       "related_query_description": "",
       "fields": [
@@ -1229,6 +1267,7 @@
     },
     "T1PUP": {
       "command_name": "T1PUP",
+      "name": "tuner_preset_next",
       "description": "Select the next available preset",
       "related_query_description": "",
       "fields": [
@@ -1247,6 +1286,7 @@
     },
     "T1PDN": {
       "command_name": "T1PDN",
+      "name": "tuner_preset_previous",
       "description": "Select the previous available preset",
       "related_query_description": "",
       "fields": [
@@ -1265,6 +1305,7 @@
     },
     "T1FMSxxx.xx": {
       "command_name": "T1FMSxxx.xx",
+      "name": "tuner_frequency",
       "description": "Tuner FM setting: 87.50-108.00. Picks nearest valid frequency.",
       "related_query_description": "T1FMS? Returns T1FMSxxx.xx",
       "fields": [
@@ -1299,6 +1340,7 @@
     },
     "ZxTBS?": {
       "command_name": "ZxTBS?",
+      "name": "tuner_status",
       "description": "Query tuner status. returns ZxTBSy where\nx=1 Main Zone\nx=2 Zone2\ny=0 Not on Tuner\ny=1 Tuner on FM",
       "related_query_description": "",
       "fields": [
@@ -1332,6 +1374,7 @@
     },
     "T1PSAxx": {
       "command_name": "T1PSAxx",
+      "name": "tuner_preset_assignment",
       "description": "Assign the current station to preset xx (01-30)",
       "related_query_description": "T1PSA? returns T1PSAyy (yy=00-30). 00=current station not assigned to a preset",
       "fields": [
@@ -1365,6 +1408,7 @@
     },
     "T1PSLxx": {
       "command_name": "T1PSLxx",
+      "name": "tuner_preset_select",
       "description": "Tuner preset xx select (xx=01-30)",
       "related_query_description": "",
       "fields": [
@@ -1394,6 +1438,7 @@
     },
     "T1PRMxx": {
       "command_name": "T1PRMxx",
+      "name": "tuner_preset_remove",
       "description": "Remove the preset xx. xx=00-30. 00=current station is removed from all presets",
       "related_query_description": "",
       "fields": [
@@ -1423,6 +1468,7 @@
     },
     "ZxSIMyyyy": {
       "command_name": "ZxSIMyyyy",
+      "name": "ir_command",
       "description": "Simulated IR Command values for ZxSIMyyyy (use 0 to fill in blanks Ex: Key 1 = 0001)",
       "related_query_description": "",
       "fields": [
@@ -1452,6 +1498,7 @@
     },
     "Z1MSGxyyyy": {
       "command_name": "Z1MSGxyyyy",
+      "name": "on_screen_message",
       "description": "Display custom on-screen status message for duration of display timeout: x=row 0-1, yyyy=message (number of characters and rows available depends on model)",
       "related_query_description": "",
       "fields": [
@@ -1493,6 +1540,7 @@
     },
     "Z1SMDx": {
       "command_name": "Z1SMDx",
+      "name": "setup_menu_display",
       "description": "Setup menu display: 0=close, 1=open, t=toggle",
       "related_query_description": "Z1SMD? returns Z1SMDx (x=0-1)",
       "fields": [
@@ -1527,6 +1575,7 @@
     },
     "Z1VIR?": {
       "command_name": "Z1VIR?",
+      "name": "video_input_resolution",
       "description": "Query video input resolution: 0=no input, 1=other, 2=1080p60, 3=1080p50, 4=1080p24, 5=1080i60, 6=1080i50, 7=720p60, 8=720p50, 9=576p50, 10=576i50, 11=480p60, 12=480i60, 13=3D, 14=4k. returns Z1VIRxx",
       "related_query_description": "",
       "fields": [
@@ -1560,6 +1609,7 @@
     },
     "Z1IRH?": {
       "command_name": "Z1IRH?",
+      "name": "horizontal_video_resolution",
       "description": "Query active horizontal video resolution (in pixels). return Z1IRHxxxx",
       "related_query_description": "",
       "fields": [
@@ -1593,6 +1643,7 @@
     },
     "Z1IRV?": {
       "command_name": "Z1IRV?",
+      "name": "vertical_video_resolution",
       "description": "Query active vertical video resolution (in pixels/lines). return Z1IRVxxxx",
       "related_query_description": "",
       "fields": [
@@ -1626,6 +1677,7 @@
     },
     "Z1AIC?": {
       "command_name": "Z1AIC?",
+      "name": "audio_input_channels",
       "description": "Query audio input channels: 0=no input, 1=other, 2=mono (center channel only), 3=2-channel, 4=5.1-channel, 5=6.1-channel, 6=7.1-channel, 7=Atmos. returns Z1AICx",
       "related_query_description": "",
       "fields": [
@@ -1659,6 +1711,7 @@
     },
     "Z1AIF?": {
       "command_name": "Z1AIF?",
+      "name": "audio_input_format",
       "description": "Query audio input format: 0=no input, 1=Analog, 2=PCM, 3=Dolby, 4= DSD, 5=DTS, 6=Atmos. Not all models support all formats (ex: DSD).. Returns Z1AIFxx",
       "related_query_description": "",
       "fields": [
@@ -1692,6 +1745,7 @@
     },
     "Z1BRT?": {
       "command_name": "Z1BRT?",
+      "name": "audio_input_bit_rate",
       "description": "Query audio input bit rate (kbps). For Analog/PCM inputs this is equal to the sample rate multiplied by the bit depth and the number of channels. returns Z1BRTxxxx, 0=analog",
       "related_query_description": "",
       "fields": [
@@ -1725,6 +1779,7 @@
     },
     "Z1SRT?": {
       "command_name": "Z1SRT?",
+      "name": "audio_input_sampling_rate",
       "description": "Query audio input sampling rate (kHz). returns Z1SRTxxx, 0=analog direct",
       "related_query_description": "",
       "fields": [
@@ -1758,6 +1813,7 @@
     },
     "Z1AIN?": {
       "command_name": "Z1AIN?",
+      "name": "audio_input_name",
       "description": "Query the current audio input name (maximum of 16 characters returned). Returns Z1AINx. Ex: Current audio input format is DTS Master Audio. 'Z1AIN?' Returns 'Z1AINDTS Master Audio'",
       "related_query_description": "",
       "fields": [
@@ -1792,6 +1848,7 @@
     },
     "Z1AIR?": {
       "command_name": "Z1AIR?",
+      "name": "audio_input_rate_name",
       "description": "Query the current audio input rate name (maximum of 16 characters returned).. Returns Z1AIRx. For lossy input formats, returns the bit rate (ex 'Z1AIR384 kbps'). For lossless audio, analog audio, or PCM audio inputs it returns the sample rate (ex: Z1AIR48 kHz).",
       "related_query_description": "",
       "fields": [
@@ -1826,6 +1883,7 @@
     },
     "Z1ALMyy": {
       "command_name": "Z1ALMyy",
+      "name": "audio_listening_mode",
       "description": "Audio Listening Mode: 00=None, 01=AnthemLogic-Movie, 02=AnthemLogic-Music, 03=PLIIx Movie, 04=PLIIx Music, 05=Neo:6 Cinema, 06=Neo:6 Music, 07=All Channel Stereo*, 08=All-Channel Mono*, 09=Mono*, 10=Mono-Academy*, 11=Mono(L)*, 12=Mono(R)*, 13=High Blend*, 14=Dolby Surround, 15=Neo:X-Cinema, 16=Neo:X-Music, na=cycle to next applicable, pa=cycle to previous applicable.  *Applicable to 2-channel source only. Some options are not available in all models or under all circumstances.",
       "related_query_description": "Z1ALM? returns Z1ALMyy",
       "fields": [
@@ -1860,6 +1918,7 @@
     },
     "Z1WCU": {
       "command_name": "Z1WCU",
+      "name": "dolby_pliix_music_center_width_up",
       "description": "Dolby PLIIx Music center width up.  Applicable only when PLIIx Music is selected for 2-channel source.\nMRX 520 only",
       "related_query_description": "",
       "fields": [
@@ -1878,6 +1937,7 @@
     },
     "Z1WCD": {
       "command_name": "Z1WCD",
+      "name": "dolby_pliix_music_center_width_up",
       "description": "Dolby PLIIx Music center width down.  Applicable only when PLIIx Music is selected for 2-channel source.\nMRX 520 only",
       "related_query_description": "",
       "fields": [
@@ -1896,6 +1956,7 @@
     },
     "Z1WSTy": {
       "command_name": "Z1WSTy",
+      "name": "dolby_pliix_music_center_width",
       "description": "Dolby PLIIx Music center width setting: y=0-7.  Applicable only when PLIIx Music is selected for 2-channel source.\nMRX 520 only",
       "related_query_description": "Z1WST? returns Z1WSTy (y=0-7)",
       "fields": [
@@ -1929,6 +1990,7 @@
     },
     "Z1DIU": {
       "command_name": "Z1DIU",
+      "name": "dolby_pliix_music_dimension_up",
       "description": "Dolby PLIIx Music Dimension up.  Applicable only when PLIIx Music is selected for 2-channel source.\nMRX 520 only",
       "related_query_description": "",
       "fields": [
@@ -1947,6 +2009,7 @@
     },
     "Z1DID": {
       "command_name": "Z1DID",
+      "name": "dolby_pliix_music_dimension_down",
       "description": "Dolby PLIIx Music Dimension down.  Applicable only when PLIIx Music is selected for 2-channel source.\nMRX 520 only",
       "related_query_description": "",
       "fields": [
@@ -1965,6 +2028,7 @@
     },
     "Z1DSTy": {
       "command_name": "Z1DSTy",
+      "name": "dolby_pliix_music_dimension",
       "description": "Dolby PLIIx Music Dimension setting: y=0-6.  Applicable only when PLIIx Music is selected for 2-channel source.\nMRX 520 only",
       "related_query_description": "Z1DST? returns Z1DSTy (y=0-6)",
       "fields": [
@@ -1998,6 +2062,7 @@
     },
     "Z1PSTy": {
       "command_name": "Z1PSTy",
+      "name": "dolby_pliix_music_panorama",
       "description": "Dolby PLIIx Music Panorama. y=0 off, y=1 on.  Applicable only when PLIIx Music is selected for 2-channel source.\nMRX 520 only",
       "related_query_description": "Z1PST? returns Z1PSTy (y=0-1)",
       "fields": [
@@ -2031,6 +2096,7 @@
     },
     "Z1DYNy": {
       "command_name": "Z1DYNy",
+      "name": "dolby_dynamic_range",
       "description": "Dolby Digital Dynamic Range (Dolby Digital 5.1 source): 0=Normal, 1=Reduced, 2=Late Night, n=cycle to next",
       "related_query_description": "Z1DYN? returns Z1DYNy (y=0-2)",
       "fields": [
@@ -2065,6 +2131,7 @@
     },
     "Z1DIA?": {
       "command_name": "Z1DIA?",
+      "name": "dolby_digital_dialog_normalization",
       "description": "Query Dolby Digital dialog normalization. returns DIAx where x is dB of normalization, n=not applicable",
       "related_query_description": "",
       "fields": [
@@ -2098,6 +2165,7 @@
     },
     "RxCTLy": {
       "command_name": "RxCTLy",
+      "name": "trigger_control",
       "description": "Trigger control. x=trigger # 0=trigger 1, 1=trigger 2, y=0 menu control, y=1 RS-232/IP",
       "related_query_description": "RxCTL? Returns RxCTLy",
       "fields": [
@@ -2131,6 +2199,7 @@
     },
     "RxSETy": {
       "command_name": "RxSETy",
+      "name": "trigger_setting",
       "description": "Trigger set: x: 0=trigger 1, 1=trigger 2.  y: 0=off, 1=on. Only available if trigger control has been set to RS-232/IP for the specified trigger",
       "related_query_description": "RxSET? returns RxSETy",
       "fields": [
