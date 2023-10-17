@@ -29,7 +29,7 @@ from anthem_receiver import (
   )
 
 from anthem_receiver.client import TcpBarePacketStreamConnector, AnthemReceiverClientConfig, resolve_receiver_tcp_host
-from anthem_receiver.protocol import PacketStreamTransport, PacketType, Packet
+from anthem_receiver.protocol import PacketStreamTransport, RawPacketType, RawPacket
 
 class CmdExitError(RuntimeError):
     exit_code: int
@@ -98,9 +98,9 @@ class CommandHandler:
                     continue
                 if raw_data == "exit" or raw_data == "quit" or raw_data == "q":
                     break
-                packet: Optional[Packet] = None
+                packet: Optional[RawPacket] = None
                 try:
-                    packet = Packet.anthem_packet(raw_data)
+                    packet = RawPacket.from_raw_data(raw_data)
                 except Exception as e:
                     if self._provide_traceback:
                         print(f"\r{self.ocolor(Fore.RED)}Invalid packet: {e}\n{traceback.format_exc()}{self.ocolor(Style.RESET_ALL)}")
@@ -125,10 +125,10 @@ class CommandHandler:
     async def handle_received_data(self) -> None:
         try:
             async for packet in self._transport:
-                packet_type = packet.packet_type
-                if packet_type == PacketType.ANTHEM:
+                packet_type = packet.raw_packet_type
+                if packet_type == RawPacketType.ANTHEM:
                     print(f"\r{' '*20}    <- {self.ocolor(Fore.BLUE)}{packet.raw_data.decode('utf-8')};{self.ocolor(Style.RESET_ALL)}")
-                elif packet_type == PacketType.INVALID_ANTHEM:
+                elif packet_type == RawPacketType.INVALID_ANTHEM:
                     print(f"\r{' '*20}    <- {self.ocolor(Fore.RED)}Invalid Anthem packet {packet.raw_data!r}{self.ocolor(Style.RESET_ALL)}")
                 else:
                     print(f"\r{' '*20}    <- {self.ocolor(Fore.RED)}Unknown Anthem packet type: {packet}{self.ocolor(Style.RESET_ALL)}")

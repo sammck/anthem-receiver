@@ -21,7 +21,7 @@ from ..internal_types import *
 from ..exceptions import AnthemReceiverError
 from ..constants import DEFAULT_TIMEOUT, DEFAULT_PORT
 from ..pkg_logging import logger
-from ..protocol import Packet, PJ_OK, PJREQ, PJACK, PJNAK
+from ..protocol import RawPacket, PJ_OK, PJREQ, PJACK, PJNAK
 
 from .client_config import AnthemReceiverClientConfig
 
@@ -116,7 +116,7 @@ class TcpAnthemReceiverClientTransport(AnthemReceiverClientTransport):
         """
         self._transaction_lock.release()
 
-    async def _read_response_packet(self) -> Packet:
+    async def _read_response_packet(self) -> RawPacket:
         """Reads a single response packet from the receiver, with timeout (nonlocking).
 
         All packets end in b'\n' (0x0a). Not usable for initial handshake
@@ -134,7 +134,7 @@ class TcpAnthemReceiverClientTransport(AnthemReceiverClientTransport):
             if packet_bytes[-1] != 0x0a:
                 raise AnthemReceiverError(f"Connection closed by receiver with partial response packet: {packet_bytes.hex(' ')}")
             try:
-                result = Packet(packet_bytes)
+                result = RawPacket(packet_bytes)
                 result.validate()
             except Exception as e:
                 raise AnthemReceiverError(f"Invalid response packet received from receiver: {packet_bytes.hex(' ')}") from e
@@ -145,7 +145,7 @@ class TcpAnthemReceiverClientTransport(AnthemReceiverClientTransport):
             raise
         return result
 
-    async def read_response_packet(self) -> Packet:
+    async def read_response_packet(self) -> RawPacket:
         """Reads a single response packet from the receiver, with timeout.
 
         All packets end in b'\n' (0x0a). Not usable for initial handshake
@@ -163,7 +163,7 @@ class TcpAnthemReceiverClientTransport(AnthemReceiverClientTransport):
         """
         try:
             basic_response_packet = await self._read_response_packet()
-            advanced_response_packet: Optional[Packet] = None
+            advanced_response_packet: Optional[RawPacket] = None
             if basic_response_packet.command_code != command_code:
                 raise AnthemReceiverError(f"Received response packet for wrong command code (expected {command_code.hex(' ')}): {basic_response_packet}")
             if basic_response_packet.is_advanced_response:
@@ -179,7 +179,7 @@ class TcpAnthemReceiverClientTransport(AnthemReceiverClientTransport):
             raise
         return (basic_response_packet, advanced_response_packet)
 
-    async def read_response_packets(self, command_code: bytes, is_advanced: bool=False) -> Tuple[Packet, Optional[Packet]]:
+    async def read_response_packets(self, command_code: bytes, is_advanced: bool=False) -> Tuple[RawPacket, Optional[RawPacket]]:
         """Reads a basic response packet and an optional advanced response packet.
 
         On error, the transport will be shut down, and no further interaction is possible.
@@ -239,14 +239,14 @@ class TcpAnthemReceiverClientTransport(AnthemReceiverClientTransport):
         async with self._transaction_lock:
             await self._write_exactly(data)
 
-    async def _send_packet(self, packet: Packet) -> None:
+    async def _send_packet(self, packet: RawPacket) -> None:
         """Sends a single command packet to the receiver, with timeout (nonlocking).
 
         On error, the transport will be shut down, and no further interaction is possible.
         """
         await self._write_exactly(packet.raw_data)
 
-    async def send_packet(self, packet: Packet) -> None:
+    async def send_packet(self, packet: RawPacket) -> None:
         """Sends a single command packet to the receiver, with timeout.
 
         On error, the transport will be shut down, and no further interaction is possible.
@@ -257,7 +257,7 @@ class TcpAnthemReceiverClientTransport(AnthemReceiverClientTransport):
     # @abstractmethod
     async def transact_no_lock(
             self,
-            command_packet: Packet,
+            command_packet: RawPacket,
           ) -> ResponsePackets:
         """Sends a command packet and reads the response packet(s).
 

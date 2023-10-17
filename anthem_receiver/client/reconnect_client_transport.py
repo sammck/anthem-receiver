@@ -21,7 +21,7 @@ from ..internal_types import *
 from ..exceptions import AnthemReceiverError
 from ..constants import DEFAULT_TIMEOUT, DEFAULT_PORT
 from ..pkg_logging import logger
-from ..protocol import Packet, PJ_OK, PJREQ, PJACK, PJNAK
+from ..protocol import RawPacket, PJ_OK, PJREQ, PJACK, PJNAK
 
 from .connector import AnthemReceiverConnector
 from .client_config import AnthemReceiverClientConfig
@@ -148,7 +148,7 @@ class ReconnectAnthemReceiverClientTransport(AnthemReceiverClientTransport):
     # @abstractmethod
     async def transact_no_lock(
             self,
-            command_packet: Packet,
+            command_packet: RawPacket,
           ) -> ResponsePackets:
         """Sends a command packet and reads the response packet(s).
 

@@ -7,10 +7,12 @@
 """Type hints used internally by this package"""
 
 from typing import (
+    cast,
     Dict,
     Union,
     Any,
     List,
+    Generic,
     Optional,
     Callable,
     Awaitable,

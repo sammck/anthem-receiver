@@ -14,7 +14,7 @@ from abc import ABC, abstractmethod
 
 from ..internal_types import *
 from ..pkg_logging import logger
-from ..protocol import Packet
+from ..protocol import RawPacket
 from .multi_response_packets import MultiResponsePackets
 if TYPE_CHECKING:
     from .client_transport import (
@@ -51,7 +51,7 @@ class AnthemReceiverClientTransportTransaction():
 
     async def transact(
             self,
-            command_packet: Packet,
+            command_packet: RawPacket,
           ) -> ResponsePackets:
         """Sends a command packet and reads the response packet(s).
 
@@ -69,7 +69,7 @@ class AnthemReceiverClientTransportTransaction():
 
     async def multi_transact(
             self,
-            command_packets: Iterable[Packet],
+            command_packets: Iterable[RawPacket],
           ) -> MultiResponsePackets:
         """Sends multiple command packets and reads all response packet(s),
            encapsulating them in MultiResponsePackets.

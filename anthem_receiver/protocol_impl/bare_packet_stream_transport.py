@@ -4,7 +4,7 @@
 #
 
 """
-A PacketStreamWriter that directly talks to Anthem receiver protocol
+A PacketStreamTransport that directly talks to Anthem receiver protocol
 """
 
 from __future__ import annotations
@@ -13,13 +13,14 @@ from __future__ import annotations
 import asyncio
 from asyncio import StreamReader, StreamWriter, Future
 
-from ..protocol.packet import Packet
-from ..protocol.packet_type import PacketType
+from ..protocol.raw_packet import RawPacket
+from ..protocol.raw_packet_type import RawPacketType
 from ..protocol.packet_stream_transport import PacketStreamTransport
 from ..protocol.constants import END_OF_PACKET_BYTES, MAX_PACKET_LENGTH, END_OF_PACKET
 from ..exceptions import AnthemReceiverError
 from ..internal_types import *
 from ..client import client_config
+
 class BarePacketStreamTransport(PacketStreamTransport):
     """
     A PacketStreamWriter that directly talks to Anthem receiver protocol
@@ -59,7 +60,7 @@ class BarePacketStreamTransport(PacketStreamTransport):
 
         Args:
             stream_reader: The StreamReader to read from.
-            stream_writer: The StreamWriterer to write to.
+            stream_writer: The StreamWriter to write to.
         """
         self.stream_reader = stream_reader
         self.stream_writer = stream_writer
@@ -72,13 +73,70 @@ class BarePacketStreamTransport(PacketStreamTransport):
     def is_closed(self) -> bool:
         return self.close_result.done()
 
-    # @abstractmethod
-    async def read(self) -> Optional[Packet]:
+    def parse_invalid_packet(self, raw_data: bytes) -> Optional[RawPacket]:
         """
-        Read the next Packet from the stream.
+        Parse an invalid packet (e.g., a packet that is too big) from raw data received from the receiver.
+
+        This method can be overridden by subclasses to implement custom packet parsing.
+        The default implementation simply returns a RawPacket with the raw_data as the
+        packet data and the packet type set to RawPacketType.INVALID_ANTHEM.
+
+        Args:
+            raw_data: The raw data received from the receiver.
 
         Returns:
-            The next Packet from the stream, or None if the stream has ended.
+            A RawPacket object, or None if the packet should be silently dropped.
+        """
+        return RawPacket(raw_packet_type=RawPacketType.INVALID_ANTHEM, raw_data=raw_data)
+
+
+    def parse_packet(self, raw_data: bytes) -> Optional[RawPacket]:
+        """
+        Parse a packet from raw data received from the receiver.
+
+        This method can be overridden by subclasses to implement custom packet parsing.
+        The default implementation simply returns a RawPacket with the raw_data as the
+        packet data.
+
+        Args:
+            raw_data: The raw data received from the receiver.
+
+        Returns:
+            A RawPacket object, or None if the packet should be silently dropped.
+        """
+        if len(raw_data) > 0 and raw_data[-1] == END_OF_PACKET:
+            raw_data = raw_data[:-1]
+        if len(raw_data) > MAX_PACKET_LENGTH:
+            return self.parse_invalid_packet(raw_data)
+        return RawPacket(raw_packet_type=RawPacketType.ANTHEM, raw_data=raw_data)
+
+    def handle_transport_error(self, raw_data: bytes) -> Optional[RawPacket]:
+        """
+        handle a transport error received from the receiver.
+
+        This method can be overridden by subclasses to implement custom packet parsing.
+        The default implementation simply returns a RawPacket with the raw_data as the
+        packet data.
+
+        Args:
+            raw_data: The raw data received from the receiver.
+
+        Returns:
+            A RawPacket object, or None if the packet should be silently dropped.
+        """
+        if len(raw_data) > 0 and raw_data[-1] == END_OF_PACKET:
+            raw_data = raw_data[:-1]
+        if len(raw_data) > MAX_PACKET_LENGTH:
+            return self.parse_invalid_packet(raw_data)
+        return RawPacket(raw_packet_type=RawPacketType.ANTHEM, raw_data=raw_data)
+
+    # @abstractmethod
+    async def read(self) -> Optional[RawPacket]:
+        """
+        Read the next RawPacket from the stream.
+
+        Returns:
+            The next RawPacket from the stream, or None if the stream has ended.
         """
 
         # Read until we have a complete packet
@@ -90,17 +148,18 @@ class BarePacketStreamTransport(PacketStreamTransport):
                 raise AnthemReceiverError("PacketStreamReader is closed")
 
             isemi = self.buffer.find(END_OF_PACKET)
+            is_invalid = False
             if 0 <= isemi <= MAX_PACKET_LENGTH:
                 # Found a complete packet (or trailing end of an invalid packet) that is not too long
                 raw_data = bytes(self.buffer[:isemi])
                 n_consumed = isemi + 1
-                packet_type = PacketType.INVALID_ANTHEM if self.skipping_invalid_packet else PacketType.ANTHEM
+                packet_type = self.skipping_invalid_packet
                 self.skipping_invalid_packet = False
             elif len(self.buffer) > MAX_PACKET_LENGTH:
                 # Found a packet or portion of a packet that is too long
                 raw_data = bytes(self.buffer[:MAX_PACKET_LENGTH])
                 n_consumed = MAX_PACKET_LENGTH
-                packet_type = PacketType.INVALID_ANTHEM
+                is_invalid = True
                 self.skipping_invalid_packet = True
             elif self.end_of_stream_reached:
                 # Reached the end of the stream and there are no buffered full packets left.
@@ -110,7 +169,7 @@ class BarePacketStreamTransport(PacketStreamTransport):
                     return None
                 raw_data = bytes(self.buffer)
                 n_consumed = len(self.buffer)
-                packet_type = PacketType.INVALID_ANTHEM
+                is_invalid = True
                 self.skipping_invalid_packet = True
             else:
                 # We don't yet have a complete packet, and the buffered partial packet is not too
@@ -127,18 +186,21 @@ class BarePacketStreamTransport(PacketStreamTransport):
         #     packet_type = packet type
         #     raw_data = packet data
         del self.buffer[:n_consumed]
-        packet = Packet(packet_type=packet_type, raw_data=raw_data)
+        if is_invalid:
+            packet = self.parse_invalid_packet(raw_data)
+        else:
+            packet = self.parse_packet(raw_data)
         return packet
 
     # @abstractmethod
-    async def write(self, packet: Packet):
+    async def write(self, packet: RawPacket):
         """
-        Writes the next Packet to the stream. May return before the packet has been
+        Writes the next RawPacket to the stream. May return before the packet has been
         fully written.
         """
-        if packet.packet_type in (PacketType.ANTHEM, PacketType.INVALID_ANTHEM):
+        if packet.raw_packet_type in (RawPacketType.ANTHEM, RawPacketType.INVALID_ANTHEM):
             raw_data = packet.raw_data
-            if packet.packet_type == PacketType.ANTHEM:
+            if packet.raw_packet_type == RawPacketType.ANTHEM:
                 raw_data += END_OF_PACKET_BYTES
             self.stream_writer.write(raw_data)
         else:

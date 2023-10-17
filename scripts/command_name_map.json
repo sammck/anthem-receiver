@@ -16,6 +16,7 @@
         },
         {
           "field_type": "string",
+          "name": "s_value",
           "pattern_letter": "x",
           "description": "model, software version, region, software build date e.g. \"AVM 60 US 0.9.5Jun 15 2020\"",
           "min_length": 1,
@@ -46,6 +47,7 @@
         },
         {
           "field_type": "string",
+          "name": "model",
           "pattern_letter": "x",
           "description": "model e.g. \"AVM 60\"",
           "min_length": 3,
@@ -76,6 +78,7 @@
         },
         {
           "field_type": "string",
+          "name": "version",
           "pattern_letter": "x",
           "description": "Software version e.g. \"0.9.5\"",
           "min_length": 5,
@@ -106,6 +109,7 @@
         },
         {
           "field_type": "string",
+          "name": "region",
           "pattern_letter": "x",
           "description": "Region, e.g. \"US \"",
           "min_length": 3,
@@ -136,6 +140,7 @@
         },
         {
           "field_type": "string",
+          "name": "s_date",
           "pattern_letter": "x",
           "description": "software build date e.g. \"Jun 15 2020\"",
           "min_length": 11,
@@ -166,6 +171,7 @@
         },
         {
           "field_type": "integer",
+          "name": "version",
           "pattern_letter": "x",
           "description": "hardware version e.g. 1",
           "require_sign": false,
@@ -195,6 +201,7 @@
         },
         {
           "field_type": "string",
+          "name": "id",
           "pattern_letter": "x",
           "description": "Unit's unique MAC address without colons; e.g., \"7CB77B014FE5\"",
           "min_length": 12,
@@ -225,6 +232,7 @@
         },
         {
           "field_type": "integer",
+          "name": "enable",
           "pattern_letter": "x",
           "description": "0=off, 1=on",
           "require_sign": false,
@@ -254,6 +262,7 @@
         },
         {
           "field_type": "string",
+          "name": "brightness",
           "pattern_letter": "x",
           "description": "0=off, 1=low, 2=medium, 3=high, n=cycle to next",
           "min_length": 1,
@@ -280,6 +289,7 @@
         },
         {
           "field_type": "integer",
+          "name": "input_number",
           "pattern_letter": "x",
           "description": "",
           "require_sign": false,
@@ -295,6 +305,7 @@
         },
         {
           "field_type": "integer",
+          "name": "enable",
           "pattern_letter": "y",
           "description": "Dolby Volume off (y=0) or on (y=1)",
           "require_sign": false,
@@ -320,6 +331,7 @@
         },
         {
           "field_type": "integer",
+          "name": "input_number",
           "pattern_letter": "x",
           "description": "Input number (xx=00-ZZ where ZZ is the number of active input configurations, 00=the current input)",
           "require_sign": false,
@@ -335,6 +347,7 @@
         },
         {
           "field_type": "integer",
+          "name": "level",
           "pattern_letter": "y",
           "description": "Dolby volume level (0=off, 1-9)",
           "require_sign": false,
@@ -360,6 +373,7 @@
         },
         {
           "field_type": "integer",
+          "name": "input_number",
           "pattern_letter": "x",
           "description": "Input number (xx=00-ZZ where ZZ is the number of active input configurations, 00=the current input)",
           "require_sign": false,
@@ -375,6 +389,7 @@
         },
         {
           "field_type": "integer",
+          "name": "delay_ms",
           "pattern_letter": "y",
           "description": "Lip sync delay (0-150) ms; Must be in increments of 5ms",
           "require_sign": false,
@@ -404,6 +419,7 @@
         },
         {
           "field_type": "integer",
+          "name": "enable",
           "pattern_letter": "x",
           "description": "Standby IP Control Disabled (x=0) or Enabled (x=1)",
           "require_sign": false,
@@ -429,6 +445,7 @@
         },
         {
           "field_type": "integer",
+          "name": "input_number",
           "pattern_letter": "x",
           "description": "Input number (xx=00-ZZ where ZZ is the number of active input configurations, 00=the current input)",
           "require_sign": false,
@@ -444,6 +461,7 @@
         },
         {
           "field_type": "integer",
+          "name": "profile_num",
           "pattern_letter": "y",
           "description": "Speaker profile number (1-4)",
           "require_sign": false,
@@ -469,6 +487,7 @@
         },
         {
           "field_type": "integer",
+          "name": "profile_num",
           "pattern_letter": "y",
           "description": "Speaker profile number (1-4)",
           "require_sign": false,
@@ -484,6 +503,7 @@
         },
         {
           "field_type": "string",
+          "name": "profile_name",
           "pattern_letter": "z",
           "description": "Speaker profile name",
           "min_length": 8,
@@ -519,6 +539,7 @@
         },
         {
           "field_type": "integer",
+          "name": "enable",
           "pattern_letter": "y",
           "description": "Power off (y=0) or on (y=1)",
           "require_sign": false,
@@ -548,6 +569,7 @@
         },
         {
           "field_type": "integer",
+          "name": "num_inputs",
           "pattern_letter": "y",
           "description": "number of active input configurations that the system supports",
           "require_sign": false,
@@ -573,6 +595,7 @@
         },
         {
           "field_type": "integer",
+          "name": "input_num",
           "pattern_letter": "y",
           "description": "input # yy=01-ZZ, where ZZ is number of supported input configurations",
           "require_sign": false,
@@ -588,6 +611,7 @@
         },
         {
           "field_type": "string",
+          "name": "short_input_name",
           "pattern_letter": "z",
           "description": "Short input name",
           "min_length": 1,
@@ -614,6 +638,7 @@
         },
         {
           "field_type": "integer",
+          "name": "input_num",
           "pattern_letter": "y",
           "description": "input # yy=01-ZZ, where ZZ is number of supported input configurations",
           "require_sign": false,
@@ -629,6 +654,7 @@
         },
         {
           "field_type": "string",
+          "name": "long_input_name",
           "pattern_letter": "z",
           "description": "Long input name",
           "min_length": 1,
@@ -664,6 +690,7 @@
         },
         {
           "field_type": "integer",
+          "name": "input_num",
           "pattern_letter": "y",
           "description": "Input selection 01-ZZ, where ZZ is the number of active input configurations",
           "require_sign": false,
@@ -694,6 +721,7 @@
         },
         {
           "field_type": "integer",
+          "name": "volume_step",
           "pattern_letter": "y",
           "description": "Number of dB to increase volume by (0-10)",
           "require_sign": false,
@@ -724,6 +752,7 @@
         },
         {
           "field_type": "integer",
+          "name": "volume_step",
           "pattern_letter": "y",
           "description": "Number of dB to decrease volume by (0-10)",
           "require_sign": false,
@@ -758,6 +787,7 @@
         },
         {
           "field_type": "integer",
+          "name": "level",
           "pattern_letter": "y",
           "description": "Volume level in db, -99 to +99",
           "require_sign": false,
@@ -792,6 +822,7 @@
         },
         {
           "field_type": "string",
+          "name": "enable_or_toggle",
           "pattern_letter": "y",
           "description": "0=unmute, 1=mute, t=toggle",
           "min_length": 1,
@@ -827,6 +858,7 @@
         },
         {
           "field_type": "integer",
+          "name": "enable",
           "pattern_letter": "y",
           "description": "ARC off (y=0) or on (y=1)",
           "require_sign": false,
@@ -857,6 +889,7 @@
         },
         {
           "field_type": "integer",
+          "name": "step_left_percent",
           "pattern_letter": "y",
           "description": "Percent to balance to left (0-100)",
           "require_sign": false,
@@ -887,6 +920,7 @@
         },
         {
           "field_type": "integer",
+          "name": "step_right_percent",
           "pattern_letter": "y",
           "description": "Percent to balance to right (0-100)",
           "require_sign": false,
@@ -921,6 +955,7 @@
         },
         {
           "field_type": "integer",
+          "name": "percent_to_right",
           "pattern_letter": "y",
           "description": "Balance setting (0-100). 0=left, 100=right, 50=middle",
           "require_sign": false,
@@ -951,6 +986,7 @@
         },
         {
           "field_type": "integer",
+          "name": "channel_num",
           "pattern_letter": "y",
           "description": "channels: 0=subs, 1=fronts, 2=center, 3=surrounds, 4=backs, 5=LFE, 6=Heights1, 7=Heights2",
           "require_sign": false,
@@ -962,6 +998,7 @@
         },
         {
           "field_type": "integer",
+          "name": "step_up_db",
           "pattern_letter": "z",
           "description": "upward dB step: 0 to 10",
           "require_sign": false,
@@ -992,6 +1029,7 @@
         },
         {
           "field_type": "integer",
+          "name": "channel_num",
           "pattern_letter": "y",
           "description": "channels: 0=subs, 1=fronts, 2=center, 3=surrounds, 4=backs, 5=LFE, 6=Heights1, 7=Heights2",
           "require_sign": false,
@@ -1003,6 +1041,7 @@
         },
         {
           "field_type": "integer",
+          "name": "step_down_db",
           "pattern_letter": "z",
           "description": "downward dB step: 0 to 10",
           "require_sign": false,
@@ -1033,6 +1072,7 @@
         },
         {
           "field_type": "integer",
+          "name": "channel_num",
           "pattern_letter": "y",
           "description": "channels: 0=subs, 1=fronts, 2=center, 3=surrounds, 4=backs, 5=LFE, 6=Heights1, 7=Heights2",
           "require_sign": false,
@@ -1048,6 +1088,7 @@
         },
         {
           "field_type": "integer",
+          "name": "level",
           "pattern_letter": "z",
           "description": "Level setting value in dB",
           "require_sign": false,
@@ -1078,6 +1119,7 @@
         },
         {
           "field_type": "integer",
+          "name": "band",
           "pattern_letter": "y",
           "description": "0 bass, 1 treble",
           "require_sign": false,
@@ -1089,6 +1131,7 @@
         },
         {
           "field_type": "integer",
+          "name": "step_up_db",
           "pattern_letter": "z",
           "description": "upward dB step: 0 to 10",
           "require_sign": false,
@@ -1119,6 +1162,7 @@
         },
         {
           "field_type": "integer",
+          "name": "band",
           "pattern_letter": "y",
           "description": "0 bass, 1 treble",
           "require_sign": false,
@@ -1130,6 +1174,7 @@
         },
         {
           "field_type": "integer",
+          "name": "step_down_db",
           "pattern_letter": "z",
           "description": "downward dB step: 0 to 10",
           "require_sign": false,
@@ -1160,6 +1205,7 @@
         },
         {
           "field_type": "integer",
+          "name": "band",
           "pattern_letter": "y",
           "description": "0 bass, 1 treble",
           "require_sign": false,
@@ -1175,6 +1221,7 @@
         },
         {
           "field_type": "integer",
+          "name": "level",
           "pattern_letter": "z",
           "description": "Tone adjustment value in dB",
           "require_sign": false,
@@ -1323,6 +1370,7 @@
         },
         {
           "field_type": "float",
+          "name": "frequency",
           "pattern_letter": "x",
           "description": "",
           "require_sign": false,
@@ -1339,7 +1387,7 @@
     },
     "ZxTBS?": {
       "command_name": "ZxTBS?",
-      "name": "tuner_status",
+      "name": "zone_tuner_status",
       "description": "Query tuner status. returns ZxTBSy where\nx=1 Main Zone\nx=2 Zone2\ny=0 Not on Tuner\ny=1 Tuner on FM",
       "related_query_description": "",
       "fields": [
@@ -1358,6 +1406,7 @@
         },
         {
           "field_type": "integer",
+          "name": "tuner_status",
           "pattern_letter": "y",
           "description": "y=0 Not on Tuner, y=1 Tuner on FM",
           "require_sign": false,
@@ -1365,7 +1414,7 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 1,
-          "value_map_name": "tuner_off_fm_map"
+          "value_map_name": "tuner_on_fm_map"
         }
       ],
       "is_settable": false,
@@ -1392,6 +1441,7 @@
         },
         {
           "field_type": "integer",
+          "name": "preset_num",
           "pattern_letter": "x",
           "description": "Preset number (01-30)",
           "require_sign": false,
@@ -1422,6 +1472,7 @@
         },
         {
           "field_type": "integer",
+          "name": "preset_num",
           "pattern_letter": "x",
           "description": "Preset number (01-30)",
           "require_sign": false,
@@ -1452,6 +1503,7 @@
         },
         {
           "field_type": "integer",
+          "name": "preset_num",
           "pattern_letter": "x",
           "description": "Preset number (01-30)",
           "require_sign": false,
@@ -1482,6 +1534,7 @@
         },
         {
           "field_type": "integer",
+          "name": "ir_code",
           "pattern_letter": "y",
           "description": "IR code (0000-9999)",
           "require_sign": false,
@@ -1489,7 +1542,7 @@
           "max_length": 4,
           "min_value": 0,
           "max_value": 9999,
-          "value_map_name": ""
+          "value_map_name": "ir_code_map"
         }
       ],
       "is_settable": false,
@@ -1512,6 +1565,7 @@
         },
         {
           "field_type": "integer",
+          "name": "row",
           "pattern_letter": "x",
           "description": "Row (0-1)",
           "require_sign": false,
@@ -1523,6 +1577,7 @@
         },
         {
           "field_type": "string",
+          "name": "message",
           "pattern_letter": "y",
           "description": "Message to display",
           "min_length": 1,
@@ -1558,6 +1613,7 @@
         },
         {
           "field_type": "string",
+          "name": "menu_action",
           "pattern_letter": "x",
           "description": "0=close menu, 1=open menu, t=toggle menu",
           "min_length": 1,
@@ -1593,6 +1649,7 @@
         },
         {
           "field_type": "integer",
+          "name": "resolution",
           "pattern_letter": "x",
           "description": "resolution: 0=no input, 1=other, 2=1080p60, 3=1080p50, 4=1080p24, 5=1080i60, 6=1080i50, 7=720p60, 8=720p50, 9=576p50, 10=576i50, 11=480p60, 12=480i60, 13=3D, 14=4k",
           "require_sign": false,
@@ -1627,6 +1684,7 @@
         },
         {
           "field_type": "integer",
+          "name": "resolution",
           "pattern_letter": "x",
           "description": "Horizontal resolution in pixels",
           "require_sign": false,
@@ -1661,6 +1719,7 @@
         },
         {
           "field_type": "integer",
+          "name": "resolution",
           "pattern_letter": "x",
           "description": "Vertical resolution in pixels",
           "require_sign": false,
@@ -1695,6 +1754,7 @@
         },
         {
           "field_type": "integer",
+          "name": "channels_status",
           "pattern_letter": "x",
           "description": "0=no input, 1=other, 2=mono (center channel only), 3=2-channel, 4=5.1-channel, 5=6.1-channel, 6=7.1-channel, 7=Atmos",
           "require_sign": false,
@@ -1729,6 +1789,7 @@
         },
         {
           "field_type": "integer",
+          "name": "audio_format",
           "pattern_letter": "x",
           "description": "0=no input, 1=Analog, 2=PCM, 3=Dolby, 4= DSD, 5=DTS, 6=Atmos",
           "require_sign": false,
@@ -1763,6 +1824,7 @@
         },
         {
           "field_type": "integer",
+          "name": "bit_rate_kbps",
           "pattern_letter": "x",
           "description": "Audio input bit rate (kbps).  0=analog",
           "require_sign": false,
@@ -1797,6 +1859,7 @@
         },
         {
           "field_type": "integer",
+          "name": "sampling_rate_khz",,
           "pattern_letter": "x",
           "description": "Audio input sampling rate (kHz).  0=analog direct",
           "require_sign": false,
@@ -1831,6 +1894,7 @@
         },
         {
           "field_type": "string",
+          "name": "input_name",
           "pattern_letter": "x",
           "description": "Audio input name",
           "min_length": 1,
@@ -1866,6 +1930,7 @@
         },
         {
           "field_type": "string",
+          "name": "input_rate_name",
           "pattern_letter": "x",
           "description": "Audio input rate name",
           "min_length": 1,
@@ -1901,6 +1966,7 @@
         },
         {
           "field_type": "string",
+          "name": "listening_mode",
           "pattern_letter": "y",
           "description": "00=None, 01=AnthemLogic-Movie, 02=AnthemLogic-Music, 03=PLIIx Movie, 04=PLIIx Music, 05=Neo:6 Cinema, 06=Neo:6 Music, 07=All Channel Stereo*, 08=All-Channel Mono*, 09=Mono*, 10=Mono-Academy*, 11=Mono(L)*, 12=Mono(R)*, 13=High Blend*, 14=Dolby Surround, 15=Neo:X-Cinema, 16=Neo:X-Music, na=cycle to next applicable, pa=cycle to previous applicable",
           "min_length": 2,
@@ -1974,6 +2040,7 @@
         },
         {
           "field_type": "integer",
+          "name": "center_width",
           "pattern_letter": "y",
           "description": "Dolby PLIIx Music center width setting (0-7)",
           "require_sign": false,
@@ -2046,6 +2113,7 @@
         },
         {
           "field_type": "integer",
+          "name": "dimension",
           "pattern_letter": "y",
           "description": "Dolby PLIIx Music Dimension setting (0-6)",
           "require_sign": false,
@@ -2080,6 +2148,7 @@
         },
         {
           "field_type": "integer",
+          "name": "enable",
           "pattern_letter": "y",
           "description": "",
           "require_sign": false,
@@ -2114,6 +2183,7 @@
         },
         {
           "field_type": "string",
+          "name": "dynamic_range",
           "pattern_letter": "y",
           "description": "0=Normal, 1=Reduced, 2=Late Night, n=cycle to next",
           "min_length": 1,
@@ -2149,6 +2219,7 @@
         },
         {
           "field_type": "integer",
+          "name": "normalization_db",
           "pattern_letter": "x",
           "description": "dB of normalization (0-99)",
           "require_sign": false,
@@ -2183,6 +2254,7 @@
         },
         {
           "field_type": "integer",
+          "name": "control_source",
           "pattern_letter": "y",
           "description": "y=0 menu control, y=1 RS-232/IP",
           "require_sign": false,
@@ -2217,6 +2289,7 @@
         },
         {
           "field_type": "integer",
+          "name": "enable",
           "pattern_letter": "y",
           "description": "trigger setting: 0=off, 1=on",
           "require_sign": false,

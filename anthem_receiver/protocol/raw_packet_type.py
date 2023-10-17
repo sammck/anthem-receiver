@@ -13,7 +13,7 @@ from aenum import Enum as AEnum
 from ..internal_types import *
 from ..exceptions import AnthemReceiverError
 
-class PacketType(AEnum):
+class RawPacketType(AEnum):
     UNKNOWN                     = 0x00000000
     """Unknown packet type"""
 

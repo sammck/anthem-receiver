@@ -31,7 +31,7 @@ from .internal_types import Jsonable, JsonableDict
 #   )
 
 # from .protocol import (
-#     Packet,
+#     RawPacket,
 #     AnthemCommand,
 #     AnthemResponse,
 #     CommandMeta,

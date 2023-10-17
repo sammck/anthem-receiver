@@ -17,7 +17,7 @@ from enum import Enum
 from ..internal_types import *
 from ..pkg_logging import logger
 from ..protocol import (
-    Packet,
+    RawPacket,
     PJ_OK,
     PJREQ,
     PJACK,
@@ -160,7 +160,7 @@ class AnthemReceiverEmulatorSession(asyncio.Protocol):
                     self.idle_timer = None
                 packet_bytes = self.partial_data[:i_eop + 1]
                 self.partial_data = self.partial_data[i_eop + 1:]
-                packet = Packet(packet_bytes)
+                packet = RawPacket(packet_bytes)
                 self.state = EmulatorSessionState.RUNNING_COMMAND
                 self.emulator.on_packet_received(self, packet)
                 self.state = EmulatorSessionState.READING_COMMAND

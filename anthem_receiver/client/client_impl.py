@@ -21,7 +21,7 @@ from ..exceptions import AnthemReceiverError
 from ..constants import DEFAULT_TIMEOUT, DEFAULT_PORT, STABLE_POWER_TIMEOUT
 from ..pkg_logging import logger
 from ..protocol import (
-    Packet,
+    RawPacket,
     AnthemModel,
     AnthemCommand,
     AnthemResponse,

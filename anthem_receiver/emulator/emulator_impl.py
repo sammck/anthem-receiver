@@ -17,7 +17,7 @@ import dp_discovery_protocol as dp
 from ..internal_types import *
 from ..pkg_logging import logger
 from ..protocol import (
-    Packet,
+    RawPacket,
     AnthemModel,
     models,
     AnthemCommand,
@@ -40,7 +40,7 @@ class AnthemReceiverEmulator(AsyncContextManager['AnthemReceiverEmulator']):
     port: int
     sessions: Dict[int, AnthemReceiverEmulatorSession]
     next_session_id: int = 0
-    requests: asyncio.Queue[Optional[Tuple[AnthemReceiverEmulatorSession, Packet]]]
+    requests: asyncio.Queue[Optional[Tuple[AnthemReceiverEmulatorSession, RawPacket]]]
     server: Optional[asyncio.Server] = None
     handler_task: Optional[asyncio.Task[None]] = None
     server_task: Optional[asyncio.Task[None]] = None
@@ -242,7 +242,7 @@ class AnthemReceiverEmulator(AsyncContextManager['AnthemReceiverEmulator']):
     def free_session_id(self, session_id: int) -> None:
         self.sessions.pop(session_id, None)
 
-    def on_packet_received(self, session: AnthemReceiverEmulatorSession, packet: Packet) -> None:
+    def on_packet_received(self, session: AnthemReceiverEmulatorSession, packet: RawPacket) -> None:
         """Called when a packet is received from a session."""
         self.requests.put_nowait((session, packet))
 
@@ -329,8 +329,8 @@ class AnthemReceiverEmulator(AsyncContextManager['AnthemReceiverEmulator']):
     async def handle_request_packet(
             self,
             session: AnthemReceiverEmulatorSession,
-            packet: Packet
-          ) -> Optional[List[Packet]]:
+            packet: RawPacket
+          ) -> Optional[List[RawPacket]]:
         """Handle a single request packet, and return response packets.
 
         If an exception is raised, the session is closed.
@@ -338,21 +338,21 @@ class AnthemReceiverEmulator(AsyncContextManager['AnthemReceiverEmulator']):
         if not packet.is_valid:
             raise AnthemReceiverError(f"Invalid request packet: {packet}")
         if not packet.is_command:
-            raise AnthemReceiverError(f"Invalid command packet type {packet.packet_type}: {packet}")
+            raise AnthemReceiverError(f"Invalid command packet type {packet.raw_packet_type}: {packet}")
 
         command = AnthemCommand.create_from_command_packet(packet, model=self.model)
         logger.debug(f"{session}: Received command: {command}")
         gen_response = await self.handle_command(session, command)
         if isinstance(gen_response, bool) and not gen_response:
             logger.debug(f"{session}: Sending NO response to command {command}")
-            packets: List[Packet] = []
+            packets: List[RawPacket] = []
         else:
             response: AnthemResponse
             if isinstance(gen_response, AnthemResponse):
                 response = gen_response
             else:
                 basic_response_packet = command.create_basic_response_packet()
-                advanced_response_packet: Optional[Packet] = None
+                advanced_response_packet: Optional[RawPacket] = None
                 if not gen_response is None and not isinstance(gen_response, bool):
                     response_payload = b''
                     if isinstance(gen_response, str):

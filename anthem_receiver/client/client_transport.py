@@ -22,13 +22,13 @@ from abc import ABC, abstractmethod
 
 from ..internal_types import *
 from ..pkg_logging import logger
-from ..protocol import Packet
+from ..protocol import RawPacket
 from .multi_response_packets import MultiResponsePackets
 
 from .client_transport_transaction import AnthemReceiverClientTransportTransaction
 
-ResponsePackets = Tuple[Packet, Optional[Packet]]
-"""A tuple of (basic_response: Packet, advanced_response: Optional[Packet]). If the response
+ResponsePackets = Tuple[RawPacket, Optional[RawPacket]]
+"""A tuple of (basic_response: RawPacket, advanced_response: Optional[RawPacket]). If the response
    is to a basic command, advanced_response will be None."""
 
 class AnthemReceiverClientTransport(ABC):
@@ -71,7 +71,7 @@ class AnthemReceiverClientTransport(ABC):
     @abstractmethod
     async def transact_no_lock(
             self,
-            command_packet: Packet,
+            command_packet: RawPacket,
           ) -> ResponsePackets:
         """Sends a command packet and reads the response packet(s).
 
@@ -88,7 +88,7 @@ class AnthemReceiverClientTransport(ABC):
 
     async def multi_transact_no_lock(
             self,
-            command_packets: Iterable[Packet],
+            command_packets: Iterable[RawPacket],
           ) -> MultiResponsePackets:
         """Sends multiple command packets and reads all response packet(s),
            encapsulating them in MultiResponsePackets.
@@ -120,8 +120,8 @@ class AnthemReceiverClientTransport(ABC):
 
     async def transact(
             self,
-            command_packet: Packet,
-          ) -> Tuple[Packet, Optional[Packet]]:
+            command_packet: RawPacket,
+          ) -> Tuple[RawPacket, Optional[RawPacket]]:
         """Sends a command packet and reads the response packet(s).
 
         The first response packet is the basic response. The second response
@@ -135,7 +135,7 @@ class AnthemReceiverClientTransport(ABC):
 
     async def multi_transact(
             self,
-            command_packets: Iterable[Packet],
+            command_packets: Iterable[RawPacket],
           ) -> MultiResponsePackets:
         """Sends multiple command packets and reads all response packet(s),
            encapsulating them in MultiResponsePackets.

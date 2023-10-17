@@ -20,10 +20,10 @@ from .constants import (
   )
 
 from .anthem_model import AnthemModel, anthem_models
-from .packet_type import PacketType
+from .raw_packet_type import RawPacketType
 
-from .packet import (
-    Packet,
+from .raw_packet import (
+    RawPacket,
   )
 
 from .packet_stream_transport import PacketStreamTransport

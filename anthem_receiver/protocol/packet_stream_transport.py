@@ -13,27 +13,27 @@ from abc import ABC, abstractmethod
 
 
 from ..internal_types import *
-from .packet import Packet
+from .raw_packet import RawPacket
 
 class PacketStreamTransport(ABC):
     """
-    Interface for a bi-directional stream of Packet objects that can be asynchronously read and written.
+    Interface for a bi-directional stream of RawPacket objects that can be asynchronously read and written.
     """
 
     @abstractmethod
-    async def read(self) -> Optional[Packet]:
+    async def read(self) -> Optional[RawPacket]:
         """
-        Read the next Packet from the stream.
+        Read the next RawPacket from the stream.
 
         Returns:
-            The next Packet from the stream, or None if the stream has ended.
+            The next RawPacket from the stream, or None if the stream has ended.
         """
         ...
 
     @abstractmethod
-    async def write(self, packet: Packet):
+    async def write(self, packet: RawPacket):
         """
-        Writes the next Packet to the stream. May retuurn before the packet has been
+        Writes the next RawPacket to the stream. May retuurn before the packet has been
         fully written.
         """
         ...
@@ -107,12 +107,12 @@ class PacketStreamTransport(ABC):
         """
         await self.aclose()
 
-    async def __aiter__(self) -> AsyncIterator[Packet]:
+    async def __aiter__(self) -> AsyncIterator[RawPacket]:
         """
         Async iterator for read side of transport.
         """
         while True:
-            packet: Optional[Packet] = await self.read()
+            packet: Optional[RawPacket] = await self.read()
             if packet is None:
                 return
             yield packet
