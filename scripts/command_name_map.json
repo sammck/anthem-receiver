@@ -241,7 +241,7 @@
           "min_value": 0,
           "max_value": 1,
           "value_map_name": "bool_field_converter",
-          "user_type": "bool",
+          "user_type": "bool"
         }
       ],
       "is_settable": true,
@@ -431,7 +431,7 @@
           "min_value": 0,
           "max_value": 1,
           "value_map_name": "bool_field_converter",
-          "user_type": "bool",
+          "user_type": "bool"
         }
       ],
       "is_settable": true,
@@ -583,7 +583,7 @@
           "min_value": 1,
           "max_value": 20,
           "value_map_name": "bool_field_converter",
-          "user_type": "bool",
+          "user_type": "bool"
         }
       ],
       "is_settable": false,
@@ -1136,7 +1136,7 @@
           "min_value": 0,
           "max_value": 1,
           "value_map_name": "eq_band_field_converter",
-          "user_type": "EqBand",
+          "user_type": "EqBand"
         },
         {
           "field_type": "integer",
@@ -1426,7 +1426,7 @@
           "min_value": 0,
           "max_value": 1,
           "value_map_name": "tuner_status_field_converter",
-          "user_type": "TunerStatus",
+          "user_type": "TunerStatus"
         }
       ],
       "is_settable": false,
@@ -1555,7 +1555,7 @@
           "min_value": 0,
           "max_value": 9999,
           "value_map_name": "ir_code_field_converter",
-          "user_type": "IrCode",
+          "user_type": "IrCode"
         }
       ],
       "is_settable": false,
@@ -1876,7 +1876,7 @@
         },
         {
           "field_type": "integer",
-          "name": "sampling_rate_khz",,
+          "name": "sampling_rate_khz",
           "pattern_letter": "x",
           "description": "Audio input sampling rate (kHz).  0=analog direct",
           "require_sign": false,
