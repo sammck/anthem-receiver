@@ -240,7 +240,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 1,
-          "value_map_name": "int_bool_map"
+          "value_map_name": "bool_field_converter",
+          "user_type": "bool",
         }
       ],
       "is_settable": true,
@@ -267,7 +268,8 @@
           "description": "0=off, 1=low, 2=medium, 3=high, n=cycle to next",
           "min_length": 1,
           "max_length": 1,
-          "value_map_name": "front_panel_brightness_map",
+          "value_map_name": "front_panel_brightness_field_converter",
+          "user_type": "FrontPanelBrightness",
           "blank_pad": true,
           "null_pad": false,
           "rstrip": true,
@@ -313,7 +315,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 1,
-          "value_map_name": "int_bool_map"
+          "value_map_name": "bool_field_converter",
+          "user_type": "bool"
         }
       ],
       "is_settable": true,
@@ -427,7 +430,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 1,
-          "value_map_name": "int_bool_map"
+          "value_map_name": "bool_field_converter",
+          "user_type": "bool",
         }
       ],
       "is_settable": true,
@@ -547,7 +551,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 1,
-          "value_map_name": "int_bool_map"
+          "value_map_name": "bool_field_converter",
+          "user_type": "bool"
         }
       ],
       "is_settable": true,
@@ -577,7 +582,8 @@
           "max_length": 2,
           "min_value": 1,
           "max_value": 20,
-          "value_map_name": "int_bool_map"
+          "value_map_name": "bool_field_converter",
+          "user_type": "bool",
         }
       ],
       "is_settable": false,
@@ -827,7 +833,8 @@
           "description": "0=unmute, 1=mute, t=toggle",
           "min_length": 1,
           "max_length": 1,
-          "value_map_name": "on_off_toggele_map",
+          "value_map_name": "on_off_toggle_field_converter",
+          "user_type": "OnOffToggle",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -866,7 +873,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 1,
-          "value_map_name": "int_bool_map"
+          "value_map_name": "bool_field_converter",
+          "user_type": "bool"
         }
       ],
       "is_settable": true,
@@ -1127,7 +1135,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 1,
-          "value_map_name": "bass_treble_map"
+          "value_map_name": "eq_band_field_converter",
+          "user_type": "EqBand",
         },
         {
           "field_type": "integer",
@@ -1170,7 +1179,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 1,
-          "value_map_name": "bass_treble_map"
+          "value_map_name": "eq_band_field_converter",
+          "user_type": "EqBand"
         },
         {
           "field_type": "integer",
@@ -1213,7 +1223,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 1,
-          "value_map_name": "bass_treble_map"
+          "value_map_name": "eq_band_field_converter",
+          "user_type": "EqBand"
         },
         {
           "field_type": "query_placeholder",
@@ -1414,7 +1425,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 1,
-          "value_map_name": "tuner_on_fm_map"
+          "value_map_name": "tuner_status_field_converter",
+          "user_type": "TunerStatus",
         }
       ],
       "is_settable": false,
@@ -1542,7 +1554,8 @@
           "max_length": 4,
           "min_value": 0,
           "max_value": 9999,
-          "value_map_name": "ir_code_map"
+          "value_map_name": "ir_code_field_converter",
+          "user_type": "IrCode",
         }
       ],
       "is_settable": false,
@@ -1618,7 +1631,8 @@
           "description": "0=close menu, 1=open menu, t=toggle menu",
           "min_length": 1,
           "max_length": 1,
-          "value_map_name": "close_open_toggle_map",
+          "value_map_name": "on_off_toggle_field_converter",
+          "user_type": "OnOffToggle",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -1657,7 +1671,8 @@
           "max_length": 2,
           "min_value": 0,
           "max_value": 14,
-          "value_map_name": "video_resolution_map"
+          "value_map_name": "video_resolution_field_converter",
+          "user_type": "VideoResolution"
         }
       ],
       "is_settable": false,
@@ -1762,7 +1777,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 7,
-          "value_map_name": "audio_input_channels_map"
+          "value_map_name": "audio_channels_status_field_converter",
+          "user_type": "AudioChannelsStatus"
         }
       ],
       "is_settable": false,
@@ -1797,7 +1813,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 6,
-          "value_map_name": "audio_input_format_map"
+          "value_map_name": "audio_format_field_converter",
+          "user_type": "AudioFormat"
         }
       ],
       "is_settable": false,
@@ -1971,7 +1988,8 @@
           "description": "00=None, 01=AnthemLogic-Movie, 02=AnthemLogic-Music, 03=PLIIx Movie, 04=PLIIx Music, 05=Neo:6 Cinema, 06=Neo:6 Music, 07=All Channel Stereo*, 08=All-Channel Mono*, 09=Mono*, 10=Mono-Academy*, 11=Mono(L)*, 12=Mono(R)*, 13=High Blend*, 14=Dolby Surround, 15=Neo:X-Cinema, 16=Neo:X-Music, na=cycle to next applicable, pa=cycle to previous applicable",
           "min_length": 2,
           "max_length": 2,
-          "value_map_name": "audio_listening_mode_map",
+          "value_map_name": "audio_listening_mode_field_converter",
+          "user_type": "AudioListeningMode",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -2156,7 +2174,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 1,
-          "value_map_name": "int_bool_map"
+          "value_map_name": "bool_field_converter",
+          "user_type": "bool"
         }
       ],
       "is_settable": true,
@@ -2188,7 +2207,8 @@
           "description": "0=Normal, 1=Reduced, 2=Late Night, n=cycle to next",
           "min_length": 1,
           "max_length": 1,
-          "value_map_name": "dolby_dynamic_range_map",
+          "value_map_name": "dolby_dynamic_range_field_converter",
+          "user_type": "DolbyDynamicRange",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -2262,7 +2282,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 0,
-          "value_map_name": "trigger_control_map"
+          "value_map_name": "trigger_control_source_field_converter",
+          "user_type": "TriggerControlSource"
         }
       ],
       "is_settable": true,
@@ -2297,7 +2318,8 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 0,
-          "value_map_name": "int_bool_map"
+          "value_map_name": "bool_field_converter",
+          "user_type": "bool"
         }
       ],
       "is_settable": true,
