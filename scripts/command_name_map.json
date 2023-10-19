@@ -20,7 +20,7 @@
           "description": "model, software version, region, software build date e.g. \"AVM 60 US 0.9.5Jun 15 2020\"",
           "min_length": 1,
           "max_length": 100,
-          "value_map_name": "",
+          "value_map_name": "StrFieldConverter",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -51,7 +51,7 @@
           "description": "model e.g. \"AVM 60\"",
           "min_length": 3,
           "max_length": 100,
-          "value_map_name": "",
+          "value_map_name": "StrFieldConverter",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -82,7 +82,7 @@
           "description": "Software version e.g. \"0.9.5\"",
           "min_length": 5,
           "max_length": 20,
-          "value_map_name": "",
+          "value_map_name": "StrFieldConverter",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -113,7 +113,7 @@
           "description": "Region, e.g. \"US \"",
           "min_length": 3,
           "max_length": 20,
-          "value_map_name": "",
+          "value_map_name": "StrFieldConverter",
           "blank_pad": true,
           "null_pad": false,
           "rstrip": true,
@@ -144,7 +144,7 @@
           "description": "software build date e.g. \"Jun 15 2020\"",
           "min_length": 11,
           "max_length": 11,
-          "value_map_name": "",
+          "value_map_name": "StrFieldConverter",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -178,7 +178,7 @@
           "max_length": 3,
           "min_value": 1,
           "max_value": 100,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -205,7 +205,7 @@
           "description": "Unit's unique MAC address without colons; e.g., \"7CB77B014FE5\"",
           "min_length": 12,
           "max_length": 12,
-          "value_map_name": "",
+          "value_map_name": "StrFieldConverter",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -296,7 +296,7 @@
           "max_length": 2,
           "min_value": 0,
           "max_value": 99,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         },
         {
@@ -338,7 +338,7 @@
           "max_length": 2,
           "min_value": 0,
           "max_value": 0,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         },
         {
@@ -354,7 +354,7 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 9,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -380,7 +380,7 @@
           "max_length": 2,
           "min_value": 0,
           "max_value": 0,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         },
         {
@@ -396,7 +396,7 @@
           "max_length": 3,
           "min_value": 0,
           "max_value": 150,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -452,7 +452,7 @@
           "max_length": 2,
           "min_value": 0,
           "max_value": 0,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         },
         {
@@ -468,7 +468,7 @@
           "max_length": 1,
           "min_value": 1,
           "max_value": 4,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -494,7 +494,7 @@
           "max_length": 1,
           "min_value": 1,
           "max_value": 4,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         },
         {
@@ -507,7 +507,7 @@
           "description": "Speaker profile name",
           "min_length": 8,
           "max_length": 8,
-          "value_map_name": "",
+          "value_map_name": "StrFieldConverter",
           "blank_pad": true,
           "null_pad": false,
           "rstrip": true,
@@ -602,7 +602,7 @@
           "max_length": 2,
           "min_value": 1,
           "max_value": 20,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         },
         {
@@ -615,7 +615,7 @@
           "description": "Short input name",
           "min_length": 1,
           "max_length": 8,
-          "value_map_name": "",
+          "value_map_name": "StrFieldConverter",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -645,7 +645,7 @@
           "max_length": 2,
           "min_value": 1,
           "max_value": 20,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         },
         {
@@ -658,7 +658,7 @@
           "description": "Long input name",
           "min_length": 1,
           "max_length": 16,
-          "value_map_name": "",
+          "value_map_name": "StrFieldConverter",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -697,7 +697,7 @@
           "max_length": 2,
           "min_value": 1,
           "max_value": 20,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -728,7 +728,7 @@
           "max_length": 2,
           "min_value": 0,
           "max_value": 10,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -759,7 +759,7 @@
           "max_length": 2,
           "min_value": 0,
           "max_value": 10,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -794,7 +794,7 @@
           "max_length": 3,
           "min_value": -99,
           "max_value": 99,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -896,7 +896,7 @@
           "max_length": 3,
           "min_value": 0,
           "max_value": 100,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -927,7 +927,7 @@
           "max_length": 3,
           "min_value": 0,
           "max_value": 100,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -962,7 +962,7 @@
           "max_length": 3,
           "min_value": 0,
           "max_value": 100,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -993,7 +993,7 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 7,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         },
         {
@@ -1005,7 +1005,7 @@
           "max_length": 2,
           "min_value": 0,
           "max_value": 10,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -1036,7 +1036,7 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 7,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         },
         {
@@ -1048,7 +1048,7 @@
           "max_length": 2,
           "min_value": 0,
           "max_value": 10,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -1079,7 +1079,7 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 7,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         },
         {
@@ -1095,7 +1095,7 @@
           "max_length": 3,
           "min_value": -10,
           "max_value": 10,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -1138,7 +1138,7 @@
           "max_length": 2,
           "min_value": 0,
           "max_value": 10,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -1181,7 +1181,7 @@
           "max_length": 2,
           "min_value": 0,
           "max_value": 10,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -1228,7 +1228,7 @@
           "max_length": 3,
           "min_value": -10,
           "max_value": 10,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -1378,7 +1378,7 @@
           "min_value": 87.5,
           "max_value": 108.0,
           "digs_after_decimal": 2,
-          "value_map_name": "",
+          "value_map_name": "FloatFieldConverter",
           "user_type": "float"
         }
       ],
@@ -1448,7 +1448,7 @@
           "max_length": 2,
           "min_value": 1,
           "max_value": 30,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -1479,7 +1479,7 @@
           "max_length": 2,
           "min_value": 1,
           "max_value": 30,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -1510,7 +1510,7 @@
           "max_length": 2,
           "min_value": 1,
           "max_value": 30,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -1572,7 +1572,7 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 1,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         },
         {
@@ -1581,7 +1581,7 @@
           "description": "Message to display",
           "min_length": 1,
           "max_length": 64,
-          "value_map_name": "",
+          "value_map_name": "StrFieldConverter",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -1691,7 +1691,7 @@
           "max_length": 4,
           "min_value": 0,
           "max_value": 9999,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -1726,7 +1726,7 @@
           "max_length": 4,
           "min_value": 0,
           "max_value": 9999,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -1831,7 +1831,7 @@
           "max_length": 4,
           "min_value": 0,
           "max_value": 9999,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -1866,7 +1866,7 @@
           "max_length": 3,
           "min_value": 0,
           "max_value": 999,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -1898,7 +1898,7 @@
           "description": "Audio input name",
           "min_length": 1,
           "max_length": 16,
-          "value_map_name": "",
+          "value_map_name": "StrFieldConverter",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -1934,7 +1934,7 @@
           "description": "Audio input rate name",
           "min_length": 1,
           "max_length": 16,
-          "value_map_name": "",
+          "value_map_name": "StrFieldConverter",
           "blank_pad": false,
           "null_pad": false,
           "rstrip": true,
@@ -2047,7 +2047,7 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 7,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -2120,7 +2120,7 @@
           "max_length": 1,
           "min_value": 0,
           "max_value": 6,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
@@ -2226,7 +2226,7 @@
           "max_length": 2,
           "min_value": 0,
           "max_value": 99,
-          "value_map_name": "",
+          "value_map_name": "IntFieldConverter",
           "user_type": "int"
         }
       ],
