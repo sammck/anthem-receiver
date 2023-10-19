@@ -8,15 +8,17 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "IDQ"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
-          "field_type": "string",
           "field_name": "info_str",
+          "field_type": "string",
           "pattern_letter": "x",
           "description": "model, software version, region, software build date e.g. \"AVM 60 US 0.9.5Jun 15 2020\"",
           "min_length": 1,
@@ -40,15 +42,17 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "IDM"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
-          "field_type": "string",
           "field_name": "model_name",
+          "field_type": "string",
           "pattern_letter": "x",
           "description": "model e.g. \"AVM 60\"",
           "min_length": 3,
@@ -72,15 +76,17 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "IDS"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
-          "field_type": "string",
           "field_name": "version",
+          "field_type": "string",
           "pattern_letter": "x",
           "description": "Software version e.g. \"0.9.5\"",
           "min_length": 5,
@@ -104,15 +110,17 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "IDR"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
-          "field_type": "string",
           "field_name": "region",
+          "field_type": "string",
           "pattern_letter": "x",
           "description": "Region, e.g. \"US \"",
           "min_length": 3,
@@ -136,15 +144,17 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "IDB"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
-          "field_type": "string",
           "field_name": "build_date",
+          "field_type": "string",
           "pattern_letter": "x",
           "description": "software build date e.g. \"Jun 15 2020\"",
           "min_length": 11,
@@ -168,10 +178,12 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "IDH"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
@@ -199,15 +211,17 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "IDN"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
-          "field_type": "string",
           "field_name": "id",
+          "field_type": "string",
           "pattern_letter": "x",
           "description": "Unit's unique MAC address without colons; e.g., \"7CB77B014FE5\"",
           "min_length": 12,
@@ -231,10 +245,12 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "ECH"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "ECH? returns ECHx"
         },
         {
@@ -262,15 +278,17 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "FPB"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "FPB? returns FPBx (x=0-3)"
         },
         {
-          "field_type": "string",
           "field_name": "brightness",
+          "field_type": "string",
           "pattern_letter": "x",
           "description": "0=off, 1=low, 2=medium, 3=high, n=cycle to next",
           "min_length": 1,
@@ -294,6 +312,7 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "SDVS"
         },
         {
@@ -311,6 +330,7 @@
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "SDVSxx? returns SDVSxxy"
         },
         {
@@ -338,6 +358,7 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "SDVL"
         },
         {
@@ -355,6 +376,7 @@
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "SDVLxx? returns SDVLxxy"
         },
         {
@@ -382,6 +404,7 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "SLIP"
         },
         {
@@ -399,6 +422,7 @@
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "SLIPxx? returns SLIPxxyyy"
         },
         {
@@ -426,10 +450,12 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "SIP"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "SIP? returns SIPx"
         },
         {
@@ -457,6 +483,7 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "SSP"
         },
         {
@@ -474,6 +501,7 @@
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "SSPxx? returns SSPxxy"
         },
         {
@@ -501,6 +529,7 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "SPN"
         },
         {
@@ -518,11 +547,12 @@
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
-          "field_type": "string",
           "field_name": "profile_name",
+          "field_type": "string",
           "pattern_letter": "z",
           "description": "Speaker profile name",
           "min_length": 8,
@@ -546,15 +576,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 0,
           "max_value": 3
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "POW"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "ZxPOW? returns ZxPOWy. Z0POW? is nonsensical and returns Z0POW?"
         },
         {
@@ -582,10 +615,12 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "ICN"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
@@ -613,6 +648,7 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "ISN"
         },
         {
@@ -630,11 +666,12 @@
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
-          "field_type": "string",
           "field_name": "short_name",
+          "field_type": "string",
           "pattern_letter": "z",
           "description": "Short input name",
           "min_length": 1,
@@ -658,6 +695,7 @@
       "fields": [
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "ILN"
         },
         {
@@ -675,11 +713,12 @@
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
-          "field_type": "string",
           "field_name": "long_name",
+          "field_type": "string",
           "pattern_letter": "z",
           "description": "Long input name",
           "min_length": 1,
@@ -703,15 +742,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 2
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "INP"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "ZxINP? returns ZxINPyy  e.g. \"Z1INP10\"."
         },
         {
@@ -739,11 +781,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 2
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "VUP"
         },
         {
@@ -771,11 +815,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 2
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "VDN"
         },
         {
@@ -803,15 +849,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 2
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "VOL"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "ZxVOL? returns ZxVOLsyy"
         },
         {
@@ -839,20 +888,23 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 2
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "MUT"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "ZxMUT? returns ZxMUTy (y=0-1)"
         },
         {
-          "field_type": "string",
           "field_name": "enable",
+          "field_type": "string",
           "pattern_letter": "y",
           "description": "0=unmute, 1=mute, t=toggle",
           "min_length": 1,
@@ -876,15 +928,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "ARC"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "ZxARC? returns ZxARCy (y=0-1)"
         },
         {
@@ -912,11 +967,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "BLT"
         },
         {
@@ -944,11 +1001,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "BRT"
         },
         {
@@ -976,15 +1035,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "BAL"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "Z1BAL? returns Z1BALyyy"
         },
         {
@@ -1012,11 +1074,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "LUP"
         },
         {
@@ -1057,11 +1121,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "LDN"
         },
         {
@@ -1102,11 +1168,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "LEV"
         },
         {
@@ -1124,12 +1192,13 @@
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "Z1LEVy? returns Z1LEVyszz"
         },
         {
           "field_type": "integer",
-          "pattern_letter": "z",
           "field_name": "level_db",
+          "pattern_letter": "z",
           "description": "Level setting value in dB",
           "require_sign": false,
           "min_length": 1,
@@ -1151,11 +1220,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "TUP"
         },
         {
@@ -1196,11 +1267,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "TDN"
         },
         {
@@ -1241,11 +1314,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "TON"
         },
         {
@@ -1263,6 +1338,7 @@
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "Z1TONy? returns Z1TONyszz"
         },
         {
@@ -1290,11 +1366,13 @@
       "fields": [
         {
           "field_type": "tuner_prefix",
+          "field_name": "tuner_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "TUP"
         }
       ],
@@ -1309,11 +1387,13 @@
       "fields": [
         {
           "field_type": "tuner_prefix",
+          "field_name": "tuner_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "TDN"
         }
       ],
@@ -1328,11 +1408,13 @@
       "fields": [
         {
           "field_type": "tuner_prefix",
+          "field_name": "tuner_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "KUP"
         }
       ],
@@ -1347,11 +1429,13 @@
       "fields": [
         {
           "field_type": "tuner_prefix",
+          "field_name": "tuner_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "KDN"
         }
       ],
@@ -1366,11 +1450,13 @@
       "fields": [
         {
           "field_type": "tuner_prefix",
+          "field_name": "tuner_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "PUP"
         }
       ],
@@ -1385,11 +1471,13 @@
       "fields": [
         {
           "field_type": "tuner_prefix",
+          "field_name": "tuner_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "PDN"
         }
       ],
@@ -1404,15 +1492,18 @@
       "fields": [
         {
           "field_type": "tuner_prefix",
+          "field_name": "tuner_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "FMS"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "T1FMS? Returns T1FMSxxx.xx"
         },
         {
@@ -1441,15 +1532,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 2
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "TBS"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
@@ -1477,15 +1571,18 @@
       "fields": [
         {
           "field_type": "tuner_prefix",
+          "field_name": "tuner_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "PSA"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "T1PSA? returns T1PSAyy (yy=00-30). 00=current station not assigned to a preset"
         },
         {
@@ -1513,11 +1610,13 @@
       "fields": [
         {
           "field_type": "tuner_prefix",
+          "field_name": "tuner_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "PSL"
         },
         {
@@ -1545,11 +1644,13 @@
       "fields": [
         {
           "field_type": "tuner_prefix",
+          "field_name": "tuner_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "PRM"
         },
         {
@@ -1577,11 +1678,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 2
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "SIM"
         },
         {
@@ -1609,11 +1712,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "MSG"
         },
         {
@@ -1630,8 +1735,8 @@
           "user_type": "int"
         },
         {
-          "field_type": "string",
           "field_name": "message",
+          "field_type": "string",
           "pattern_letter": "y",
           "description": "Message to display",
           "min_length": 1,
@@ -1655,20 +1760,23 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "SMD"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "Z1SMD? returns Z1SMDx (x=0-1)"
         },
         {
-          "field_type": "string",
           "field_name": "enable",
+          "field_type": "string",
           "pattern_letter": "x",
           "description": "0=close menu, 1=open menu, t=toggle menu",
           "min_length": 1,
@@ -1692,15 +1800,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "VIR"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
@@ -1728,15 +1839,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "IRH"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
@@ -1764,15 +1878,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "IRV"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
@@ -1800,15 +1917,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "AIC"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
@@ -1836,15 +1956,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "AIF"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
@@ -1872,15 +1995,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "BRT"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
@@ -1908,15 +2034,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "SRT"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
@@ -1944,20 +2073,23 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "AIN"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
-          "field_type": "string",
           "field_name": "input_name",
+          "field_type": "string",
           "pattern_letter": "x",
           "description": "Audio input name",
           "min_length": 1,
@@ -1981,20 +2113,23 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "AIR"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
-          "field_type": "string",
           "field_name": "input_rate_name",
+          "field_type": "string",
           "pattern_letter": "x",
           "description": "Audio input rate name",
           "min_length": 1,
@@ -2018,20 +2153,23 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "ALM"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "Z1ALM? returns Z1ALMyy"
         },
         {
-          "field_type": "string",
           "field_name": "listening_mode",
+          "field_type": "string",
           "pattern_letter": "y",
           "description": "00=None, 01=AnthemLogic-Movie, 02=AnthemLogic-Music, 03=PLIIx Movie, 04=PLIIx Music, 05=Neo:6 Cinema, 06=Neo:6 Music, 07=All Channel Stereo*, 08=All-Channel Mono*, 09=Mono*, 10=Mono-Academy*, 11=Mono(L)*, 12=Mono(R)*, 13=High Blend*, 14=Dolby Surround, 15=Neo:X-Cinema, 16=Neo:X-Music, na=cycle to next applicable, pa=cycle to previous applicable",
           "min_length": 2,
@@ -2055,11 +2193,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "WCU"
         }
       ],
@@ -2074,11 +2214,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "WCD"
         }
       ],
@@ -2093,15 +2235,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "WST"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "Z1WST? returns Z1WSTy (y=0-7)"
         },
         {
@@ -2129,11 +2274,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "DIU"
         }
       ],
@@ -2148,11 +2295,13 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "DID"
         }
       ],
@@ -2167,15 +2316,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "DST"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "Z1DST? returns Z1DSTy (y=0-6)"
         },
         {
@@ -2203,15 +2355,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "PST"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "Z1PST? returns Z1PSTy (y=0-1)"
         },
         {
@@ -2239,20 +2394,23 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "DYN"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "Z1DYN? returns Z1DYNy (y=0-2)"
         },
         {
-          "field_type": "string",
           "field_name": "dynamic_range",
+          "field_type": "string",
           "pattern_letter": "y",
           "description": "0=Normal, 1=Reduced, 2=Late Night, n=cycle to next",
           "min_length": 1,
@@ -2276,15 +2434,18 @@
       "fields": [
         {
           "field_type": "zone_prefix",
+          "field_name": "zone_prefix",
           "min_value": 1,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "DIA"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": ""
         },
         {
@@ -2312,15 +2473,18 @@
       "fields": [
         {
           "field_type": "trigger_prefix",
+          "field_name": "trigger_prefix",
           "min_value": 0,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "CTL"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "RxCTL? Returns RxCTLy"
         },
         {
@@ -2348,15 +2512,18 @@
       "fields": [
         {
           "field_type": "trigger_prefix",
+          "field_name": "trigger_prefix",
           "min_value": 0,
           "max_value": 1
         },
         {
           "field_type": "command_code",
+          "field_name": "command_code",
           "value": "SET"
         },
         {
           "field_type": "query_placeholder",
+          "field_name": "query_placeholder",
           "description": "RxSET? returns RxSETy"
         },
         {
