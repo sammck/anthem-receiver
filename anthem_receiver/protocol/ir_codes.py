@@ -13,7 +13,7 @@ from __future__ import annotations
 
 from ..internal_types import *
 
-from field_converter import FieldConverter, ExpandableIntEnumFieldConverter
+from .field_converter import ExpandableIntEnumFieldConverter
 
 from enum import Enum
 

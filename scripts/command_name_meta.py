@@ -122,6 +122,7 @@ and a field_descriptor is a dict that looks like one of:
 class FieldDescriptor:
     field_type: str
     field_name: str
+    user_type: str = ''
 
     def __init__(self) -> None:
         self.field_name = self.field_type
@@ -157,8 +158,10 @@ class FieldDescriptor:
 
 class ZonePrefixFieldDescriptor(FieldDescriptor):
     field_type: str = "zone_prefix"
+    field_name: str = "zone"
     min_value: int
     max_value: int
+    user_type: str = 'ZoneId'
 
     def __init__(self, min_value: int=1, max_value: int=2):
         super().__init__()
@@ -168,6 +171,7 @@ class ZonePrefixFieldDescriptor(FieldDescriptor):
     def to_jsonable(self) -> Dict[str, int]:
         return dict(
             field_type=self.field_type,
+            field_name=self.field_name,
             min_value=self.min_value,
             max_value=self.max_value,
         )
@@ -183,8 +187,10 @@ class ZonePrefixFieldDescriptor(FieldDescriptor):
 
 class TunerPrefixFieldDescriptor(FieldDescriptor):
     field_type: str = "tuner_prefix"
+    field_name: str = "tuner"
     min_value: int
     max_value: int
+    user_type: str = 'TunerId'
 
     def __init__(self, min_value: int=1, max_value: int=1):
         super().__init__()
@@ -194,6 +200,7 @@ class TunerPrefixFieldDescriptor(FieldDescriptor):
     def to_jsonable(self) -> Dict[str, int]:
         return dict(
             field_type=self.field_type,
+            field_name=self.field_name,
             min_value=self.min_value,
             max_value=self.max_value,
         )
@@ -208,8 +215,10 @@ class TunerPrefixFieldDescriptor(FieldDescriptor):
 
 class TriggerPrefixFieldDescriptor(FieldDescriptor):
     field_type: str = "trigger_prefix"
+    field_name: str = "trigger"
     min_value: int
     max_value: int
+    user_type: str = 'TriggerId'
 
     def __init__(self, min_value: int=1, max_value: int=1):
         super().__init__()
@@ -219,6 +228,7 @@ class TriggerPrefixFieldDescriptor(FieldDescriptor):
     def to_jsonable(self) -> Dict[str, int]:
         return dict(
             field_type=self.field_type,
+            field_name=self.field_name,
             min_value=self.min_value,
             max_value=self.max_value,
         )
@@ -233,7 +243,9 @@ class TriggerPrefixFieldDescriptor(FieldDescriptor):
 
 class CommandCodeFieldDescriptor(FieldDescriptor):
     field_type: str = "command_code"
+    field_name: str = "command_code"
     value: str
+    user_type: str = 'str'
 
     def __init__(self, value: str):
         super().__init__()
@@ -242,6 +254,7 @@ class CommandCodeFieldDescriptor(FieldDescriptor):
     def to_jsonable(self) -> Dict[str, int]:
         return dict(
             field_type=self.field_type,
+            field_name=self.field_name,
             value=self.value,
         )
 
@@ -254,6 +267,7 @@ class CommandCodeFieldDescriptor(FieldDescriptor):
 
 class QueryPlaceholderDescriptor(FieldDescriptor):
     field_type: str = "query_placeholder"
+    field_name: str = "query_placeholder"
     description: str
 
     def __init__(self, description: str):
@@ -262,6 +276,7 @@ class QueryPlaceholderDescriptor(FieldDescriptor):
     def to_jsonable(self) -> Dict[str, int]:
         return dict(
             field_type=self.field_type,
+            field_name=self.field_name,
             description=self.description,
         )
 
@@ -282,10 +297,14 @@ class IntegerDescriptor(FieldDescriptor):
     min_value: int
     max_value: int
     value_map_name: str
+    user_type: str = 'int'
 
-    def __init__(self, pattern_letter: str, description: str, require_sign: bool=False, min_length: int=1, max_length: int=1, min_value: int=0, max_value: int=0, value_map_name: str=''):
+    def __init__(
+            self, field_name: str, pattern_letter: str, description: str, require_sign: bool=False,
+            min_length: int=1, max_length: int=1, min_value: int=0, max_value: int=0, value_map_name: str='',
+            user_type: str = 'int'):
         super().__init__()
-        self.field_name = pattern_letter
+        self.field_name = field_name
         self.pattern_letter = pattern_letter
         self.description = description
         self.require_sign = require_sign
@@ -293,11 +312,14 @@ class IntegerDescriptor(FieldDescriptor):
         self.max_length = max_length
         self.min_value = min_value
         self.max_value = max_value
+        value_map_name = 'IntFieldConverter' if value_map_name == '' else value_map_name
         self.value_map_name = value_map_name
+        self.user_type = user_type
 
     def to_jsonable(self) -> Dict[str, int]:
         return dict(
             field_type=self.field_type,
+            field_name=self.field_name,
             pattern_letter=self.pattern_letter,
             description=self.description,
             require_sign=self.require_sign,
@@ -306,12 +328,15 @@ class IntegerDescriptor(FieldDescriptor):
             min_value=self.min_value,
             max_value=self.max_value,
             value_map_name=self.value_map_name,
+            user_type=self.user_type,
         )
 
     @classmethod
     def from_jsonable(cls, jsonable: Dict[str, int]) -> ZonePrefixFieldDescriptor:
         assert jsonable['field_type'] == cls.field_type
+        field_name = jsonable.get('field_name', jsonable['pattern_letter'])
         return cls(
+            field_name=field_name,
             pattern_letter=jsonable['pattern_letter'],
             description=jsonable['description'],
             require_sign=jsonable['require_sign'],
@@ -320,6 +345,7 @@ class IntegerDescriptor(FieldDescriptor):
             min_value=jsonable['min_value'],
             max_value=jsonable['max_value'],
             value_map_name=jsonable['value_map_name'],
+            user_type=jsonable.get('user_type', 'int'),
         )
 
 class FloatDescriptor(FieldDescriptor):
@@ -332,10 +358,14 @@ class FloatDescriptor(FieldDescriptor):
     max_value: int
     digs_after_decimal: int
     value_map_name: str
+    user_type: str = 'float'
 
-    def __init__(self, pattern_letter: str, description: str, require_sign: bool=False, min_length: int=1, max_length: int=1, min_value: int=0, max_value: int=0, digs_after_decimal: int=2, value_map_name: str=''):
+    def __init__(
+            self, field_name: str, pattern_letter: str, description: str, require_sign: bool=False,
+            min_length: int=1, max_length: int=1, min_value: int=0, max_value: int=0,
+            digs_after_decimal: int=2, value_map_name: str='', user_type: str = 'float'):
         super().__init__()
-        self.field_name = pattern_letter
+        self.field_name = field_name
         self.pattern_letter = pattern_letter
         self.description = description
         self.require_sign = require_sign
@@ -344,11 +374,14 @@ class FloatDescriptor(FieldDescriptor):
         self.min_value = min_value
         self.max_value = max_value
         self.digs_after_decimal = digs_after_decimal
+        value_map_name = 'FloatFieldConverter' if value_map_name == '' else value_map_name
         self.value_map_name = value_map_name
+        self.user_type = user_type
 
     def to_jsonable(self) -> Dict[str, int]:
         return dict(
             field_type=self.field_type,
+            field_name=self.field_name,
             pattern_letter=self.pattern_letter,
             description=self.description,
             require_sign=self.require_sign,
@@ -358,12 +391,15 @@ class FloatDescriptor(FieldDescriptor):
             max_value=self.max_value,
             digs_after_decimal=self.digs_after_decimal,
             value_map_name=self.value_map_name,
+            user_type=self.user_type,
         )
 
     @classmethod
     def from_jsonable(cls, jsonable: Dict[str, int]) -> ZonePrefixFieldDescriptor:
         assert jsonable['field_type'] == cls.field_type
+        field_name = jsonable.get('field_name', jsonable['pattern_letter'])
         return cls(
+            field_name=field_name,
             pattern_letter=jsonable['pattern_letter'],
             description=jsonable['description'],
             require_sign=jsonable['require_sign'],
@@ -373,6 +409,7 @@ class FloatDescriptor(FieldDescriptor):
             max_value=jsonable['max_value'],
             digs_after_decimal=jsonable['digs_after_decimal'],
             value_map_name=jsonable['value_map_name'],
+            user_type=jsonable.get('user_type', 'float'),
         )
 
 
@@ -387,22 +424,30 @@ class StringDescriptor(FieldDescriptor):
     null_pad: bool # if True, the string is padded with nulls to the min_length
     rstrip: bool # if True, trailing spaces are removed
     null_rstrip: bool # if True, trailing nulls are removed
+    user_type: str = 'str'
 
-    def __init__(self, pattern_letter: str, description: str, min_length: int=1, max_length: int=1, value_map_name: str='', blank_pad: bool=False, null_pad: bool=False, rstrip: bool=False, null_rstrip: bool=False):
+    def __init__(
+            self, field_name: str, pattern_letter: str, description: str, min_length: int=1,
+            max_length: int=1, value_map_name: str='', blank_pad: bool=False,
+            null_pad: bool=False, rstrip: bool=False, null_rstrip: bool=False,
+            user_type: str = 'str'):
         super().__init__()
-        self.field_name = pattern_letter
+        self.field_name = field_name
         self.pattern_letter = pattern_letter
         self.description = description
         self.min_length = min_length
         self.max_length = max_length
+        value_map_name = 'StrFieldConverter' if value_map_name == '' else value_map_name
         self.value_map_name = value_map_name
         self.blank_pad = blank_pad
         self.null_pad = null_pad
         self.rstrip = rstrip
         self.null_rstrip = null_rstrip
+        self.user_type = user_type
 
     def to_jsonable(self) -> Dict[str, int]:
         return dict(
+            field_name=self.field_name,
             field_type=self.field_type,
             pattern_letter=self.pattern_letter,
             description=self.description,
@@ -413,12 +458,15 @@ class StringDescriptor(FieldDescriptor):
             null_pad=self.null_pad,
             rstrip=self.rstrip,
             null_rstrip=self.null_rstrip,
+            user_type=self.user_type,
         )
 
     @classmethod
     def from_jsonable(cls, jsonable: Dict[str, int]) -> ZonePrefixFieldDescriptor:
         assert jsonable['field_type'] == cls.field_type
+        field_name = jsonable.get('field_name', jsonable['pattern_letter'])
         return cls(
+            field_name=field_name,
             pattern_letter=jsonable['pattern_letter'],
             description=jsonable['description'],
             min_length=jsonable['min_length'],
@@ -428,6 +476,7 @@ class StringDescriptor(FieldDescriptor):
             null_pad=jsonable['null_pad'],
             rstrip=jsonable['rstrip'],
             null_rstrip=jsonable['null_rstrip'],
+            user_type=jsonable.get('user_type', 'str'),
         )
 
 

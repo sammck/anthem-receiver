@@ -66,7 +66,7 @@ class StrFieldConverter(FieldConverter[str]):
     null_strip: bool
     """Whether to strip trailing nulls from the rawdata field."""
 
-    def __init(self, min_length: int=1, max_length: int=12, blank_pad: bool=True, null_pad: bool=False, blank_strip: Optional[bool]=None, null_strip: Optional[bool]=None):
+    def __init__(self, min_length: int=1, max_length: int=12, blank_pad: bool=True, null_pad: bool=False, blank_strip: Optional[bool]=None, null_strip: Optional[bool]=None):
         self.min_length = min_length
         self.max_length = max_length
         self.blank_pad = blank_pad
@@ -138,7 +138,7 @@ class IntFieldConverter(FieldConverter[int]):
     require_sign: bool
     """True if a +/- sign is required for the field."""
 
-    def __init(self, min_length: int=1, max_length: int=12, min_value: int=0, max_value: int=0xffffffff, require_sign: bool=False):
+    def __init__(self, min_length: int=1, max_length: int=12, min_value: int=0, max_value: int=0xffffffff, require_sign: bool=False):
         self.min_length = min_length
         self.max_length = max_length
         self.min_value = min_value
@@ -213,7 +213,7 @@ class FloatFieldConverter(FieldConverter[float]):
     digs_after_decimal: int
     """The number of digits after the decimal point."""
 
-    def __init(self, min_length: int=1, max_length: int=12, min_value: float=0.0, max_value: float=999999.0, require_sign: bool=False,
+    def __init__(self, min_length: int=1, max_length: int=12, min_value: float=0.0, max_value: float=999999.0, require_sign: bool=False,
                digs_after_decimal: int=0):
         self.min_length = min_length
         self.max_length = max_length
@@ -277,7 +277,7 @@ class IntEnumFieldConverter(FieldConverter[_IntEnumT]):
 
     int_converter: IntFieldConverter
 
-    def __init(self, min_length: int=1, max_length: int=12, min_value: int=0, max_value: int=0xffffffff, require_sign: bool=False):
+    def __init__(self, min_length: int=1, max_length: int=12, min_value: int=0, max_value: int=0xffffffff, require_sign: bool=False):
         self.int_converter = IntFieldConverter(min_length=min_length, max_length=max_length, min_value=min_value, max_value=max_value, require_sign=require_sign)
 
     def to_jsonable(self, value: _IntEnumT) -> Jsonable:
@@ -320,7 +320,7 @@ class StrEnumFieldConverter(FieldConverter[_StrEnumT]):
 
     str_converter: StrFieldConverter
 
-    def __init(self, min_length: int=1, max_length: int=12):
+    def __init__(self, min_length: int=1, max_length: int=12):
         self.str_converter = StrFieldConverter(min_length=min_length, max_length=max_length)
 
     def to_jsonable(self, value: _StrEnumT) -> Jsonable:
@@ -362,7 +362,7 @@ class ExpandableIntEnumFieldConverter(FieldConverter[Union[int, _IntEnumT]]):
 
     int_converter: IntFieldConverter
 
-    def __init(self, min_length: int=1, max_length: int=12, min_value: int=0, max_value: int=0xffffffff, require_sign: bool=False):
+    def __init__(self, min_length: int=1, max_length: int=12, min_value: int=0, max_value: int=0xffffffff, require_sign: bool=False):
         self.int_converter = IntFieldConverter(min_length=min_length, max_length=max_length, min_value=min_value, max_value=max_value, require_sign=require_sign)
 
     def to_jsonable(self, value: Union[int, _IntEnumT]) -> Jsonable:
@@ -417,7 +417,7 @@ class StrEnumFieldConverter(FieldConverter[_StrEnumT]):
 
     str_converter: StrFieldConverter
 
-    def __init(self, min_length: int=1, max_length: int=12):
+    def __init__(self, min_length: int=1, max_length: int=12):
         self.str_converter = StrFieldConverter(min_length=min_length, max_length=max_length)
 
     def to_jsonable(self, value: _StrEnumT) -> Jsonable:
@@ -459,7 +459,7 @@ class ExpandableStrEnumFieldConverter(FieldConverter[Union[str, _StrEnumT]]):
 
     str_converter: StrFieldConverter
 
-    def __init(self, min_length: int=1, max_length: int=12):
+    def __init__(self, min_length: int=1, max_length: int=12):
         self.str_converter = StrFieldConverter(min_length=min_length, max_length=max_length)
 
     def to_jsonable(self, value: Union[str, _StrEnumT]) -> Jsonable:
@@ -513,7 +513,7 @@ class BoolFieldConverter(FieldConverter[bool]):
 
     int_converter: IntFieldConverter
 
-    def __init(self):
+    def __init__(self):
         self.int_converter = IntFieldConverter(min_length=1, max_length=1, min_value=0, max_value=1)
 
     def to_jsonable(self, value: bool) -> Jsonable:
@@ -567,6 +567,19 @@ class OnOffToggle(Enum):
     TOGGLE = "t"    # command only; not a state
 
 on_off_toggle_field_converter: StrEnumFieldConverter[OnOffToggle] = StrEnumFieldConverter(min_length=1, max_length=1)
+
+class AudioChannelGroup(Enum)
+    """Audio channel group."""
+    SUBS      = 0
+    FRONTS    = 1
+    CENTER    = 2
+    SURROUNDS = 3
+    BACKS     = 4
+    LFE       = 5
+    HEIGHTS1  = 6
+    HEIGHTS2  = 7
+
+audio_channel_group_field_converter: IntEnumFieldConverter[AudioChannelGroup] = IntEnumFieldConverter(min_length=1, max_length=1, min_value=0, max_value=7)
 
 class EqBand(Enum):
     """Equalization band (bass or treble)."""

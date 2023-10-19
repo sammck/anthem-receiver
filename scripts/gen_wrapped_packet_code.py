@@ -20,15 +20,43 @@ src_dir = os.path.dirname(os.path.abspath(__file__))
 def snake_to_camel(s: str) -> str:
     return ''.join([w.capitalize() for w in s.split('_')])
 
-def emit_field_declaration(f: TextIO, field: FieldDescriptor) -> None:
-    field_type = field.field_type
-    if field_type == "integer":
-        f.write(f'''
+def emit_field_declaration(f: TextIO, field: FieldDescriptor, is_optional: bool=False) -> None:
+    field_raw_type_name = field.field_type
+    field_name = field.field_name
+    field_type_name = field.user_type
+    field_description = field.description
+    field_converter = field.field_map_name
+    if 'A' <= field_converter[0] <= 'Z':
+        # a parameterized instance
+        if not '(' in field_converter:
+            if field_raw_type_name == "integer":
+                field_converter = f"{field_converter}(min_length={field.min_length}, max_length={field.max_length}, min_value={field.min_value}, max_value={field.max_value}, require_sign={field.require_sign})"
+            elif field_raw_type_name == "float":
+                field_converter = f"{field_converter}(min_length={field.min_length}, max_length={field.max_length}, min_value={field.min_value}, max_value={field.max_value}, require_sign={field.require_sign}, digs_after_decimal={field.digs_after_decimal})"
+            elif field_raw_type_name == "string":
+                field_converter = f"{field_converter}(min_length={field.min_length}, max_length={field.max_length}, blank_pad={field.blank_pad}, null_pad={field.null_pad}, blank_strip={field.blank_strip}, null_strip={field.null_strip})"
+            else:
+                raise RuntimeError(f"Unable to initialize raw field type: {field_raw_type_name}")
+
+
+    field_converter: Optional[str] = None
+    field_converter_class_name: Optional[str] = None
+    field_is_optional: bool = True
+    field_default_value: str = "None"
+    if field_mapper is None:
+        if field_raw_type_name == "integer":
+            field_type_name = "int"
+        elif field_raw_type_name == "float":
+            field_type_name = "float"
+        elif field_raw_type_name == "string":
+            field_type_name = "str"
+
+
+
     {field.name}: int = 0
-    """{field.description}"""
+    """{field_description}"""
 ''')
 
-def em
 def main() -> int:
     logging.basicConfig(level=logging.DEBUG)
 
