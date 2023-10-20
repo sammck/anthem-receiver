@@ -35,6 +35,7 @@ from typing import (
     MutableMapping,
     Sequence,
     AsyncIterator,
+    TextIO,
   )
 
 from types import TracebackType

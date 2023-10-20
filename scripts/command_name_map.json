@@ -1698,7 +1698,7 @@
           "min_value": 0,
           "max_value": 9999,
           "value_map_name": "ir_code_field_converter",
-          "user_type": "IrCode"
+          "user_type": "IRCode"
         }
       ],
       "is_settable": false,
